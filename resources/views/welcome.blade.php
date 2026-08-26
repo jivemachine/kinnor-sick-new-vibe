@@ -13,6 +13,12 @@
 
     <meta name="theme-color" content="#2e4759">
 
+    <link
+        rel="icon"
+        href="{{ asset('kinnor-logo.avif') }}"
+        type="image/avif"
+    >
+
     @vite([
         'resources/css/app.css',
         'resources/js/app.js',
