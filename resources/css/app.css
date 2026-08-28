@@ -22,6 +22,32 @@
     background: #f4f0e8;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+html {
+    color: #13232e;
+    background: #f4f0e8;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background: #f4f0e8;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+    color: #f4f0e8;
+    background: #ff5b3d;
+}
+
 .kinnor-shell {
     --pointer-x: 50%;
     --pointer-y: 50%;
@@ -45,4 +71,18 @@
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
 
+    .cursor-orb,
+    .intro-loader {
+        display: none !important;
+    }
+}
