@@ -1,35 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Fraunces:opsz,wght@9..144,300;9..144,700;9..144,900&family=Syne:wght@500;700;800&display=swap');
+
 @import 'tailwindcss';
 
 @source '../views/**/*.blade.php';
 @source '../js/**/*.vue';
 
 :root {
+    --ink: #13232e;
+    --blue: #2e4759;
+    --blue-dark: #1f3442;
+    --cream: #f4f0e8;
+
+    --lime: #f0ff54;
+    --pink: #ff82a9;
+    --orange: #ff5b3d;
+    --electric: #4774ff;
+
+    --line: 2px solid var(--ink);
+
     color: #13232e;
     background: #f4f0e8;
 }
 
-* {
-    box-sizing: border-box;
+.kinnor-shell {
+    --pointer-x: 50%;
+    --pointer-y: 50%;
+
+    color: var(--ink);
+    background: var(--cream);
+    font-family: 'DM Mono', monospace;
 }
 
-html {
-    color: #13232e;
-    background: #f4f0e8;
-    scroll-behavior: smooth;
+.kinnor-shell button,
+.kinnor-shell a {
+    color: inherit;
+    font: inherit;
 }
 
-body {
-    margin: 0;
-    overflow-x: hidden;
-    background: #f4f0e8;
+@media (min-width: 901px) {
+    .kinnor-shell,
+    .kinnor-shell a,
+    .kinnor-shell button {
+        cursor: none;
+    }
 }
 
-button,
-a {
-    -webkit-tap-highlight-color: transparent;
-}
 
-::selection {
-    color: #f4f0e8;
-    background: #ff5b3d;
-}
