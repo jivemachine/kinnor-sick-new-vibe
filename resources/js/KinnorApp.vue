@@ -2,6 +2,7 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import IntroLoader from "./components/IntroLoader.vue";
 import SiteNavigation from "./components/SiteNavigation.vue";
+import HeroSection from "./components/HeroSection.vue";
 
 const root = ref<HTMLElement | null>(null);
 
@@ -11,7 +12,7 @@ const clock = ref("");
 
 let clockTimer: ReturnType<typeof setInterval> | undefined;
 let gsapContext: { revert: () => void } | undefined;
-const cleanupFunctions: Array<() => void> = [];
+// const cleanupFunctions: Array<() => void> = [];
 
 function updateClock() {
     clock.value = new Intl.DateTimeFormat("en-US", {
@@ -95,6 +96,10 @@ onBeforeUnmount(() => {
             @navigate="scrollToSection"
             @toggle="toggleNavigation"
         />
+
+        <main>
+            <HeroSection />
+        </main>
 
     </div>
 </template>
