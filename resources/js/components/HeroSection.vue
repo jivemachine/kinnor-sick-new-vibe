@@ -84,6 +84,10 @@ const emit = defineEmits<{
         padding-top: 9rem;
     }
 
+    .hero__eyebrow {
+        margin: 0 0 0.4rem 0.4rem;
+    }
+
     .hero__title {
         font-size: 26vw;
         line-height: .8;
@@ -99,6 +103,7 @@ const emit = defineEmits<{
     .hero__eyebrow {
         max-width: 210px;
         line-height: 1.5;
+        margin: 0 0 0.3rem 0.2rem;
     }
 
     .hero__title {
