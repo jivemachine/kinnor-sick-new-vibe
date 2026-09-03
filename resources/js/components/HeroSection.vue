@@ -71,7 +71,7 @@ const emit = defineEmits<{
     font-size: clamp(9rem, 24.3vw, 25rem);
     font-weight: 400;
     line-height: .68;
-    letter-spacing: -0.3em;
+    letter-spacing: -.03em;
     white-space: nowrap;
 }
 
