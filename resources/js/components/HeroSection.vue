@@ -109,7 +109,7 @@ const emit = defineEmits<{
     <section id="top" class="hero">
         <div class="hero__spotlight" aria-hidden="true"></div>
         <div class="hero__noise"></div>
-        <p class="hero__eyebrow">540 S CASTEL AVE - NEW BRAUNFELS, TEXAS</p>
+        <p class="hero__eyebrow">540 S CASTELL AVE - NEW BRAUNFELS, TEXAS</p>
 
         <div class="hero__title-wrap" aria-label="Kinnor">
             <h1 class="hero__title" aria-hidden="true">
