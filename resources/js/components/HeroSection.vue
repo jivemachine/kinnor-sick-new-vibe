@@ -53,7 +53,7 @@ const emit = defineEmits<{
 }
 
 .hero__eyebrow {
-    margin: 0 1 1.2rem;
+    margin: 0 0 0 .8rem;
     font-size: clamp(.58rem, .8vw, .74rem);
     letter-spacing: .16em;
 }
@@ -65,17 +65,44 @@ const emit = defineEmits<{
 .hero__title {
     display: flex;
     margin: 0;
-    overflow: hidden;
     color: var(--cream);
     font-family: "Bebas Neue", Impact, sans-serif;
     font-size: clamp(9rem, 24.3vw, 25rem);
     font-weight: 400;
-    line-height: .68;
-    letter-spacing: -.03em;
+    line-height: 0.8;
+    letter-spacing: -.01em;
     white-space: nowrap;
 }
 
 .hero-letter {
     display: inline-block;
+}
+
+@media (max-width: 900px) {
+    .hero {
+        min-height: 880px;
+        padding-top: 9rem;
+    }
+
+    .hero__title {
+        font-size: 26vw;
+        line-height: .8;
+    }
+}
+
+@media (max-width: 560px) {
+    .hero {
+        min-height: 780px;
+        padding-inline: 1rem;
+    }
+
+    .hero__eyebrow {
+        max-width: 210px;
+        line-height: 1.5;
+    }
+
+    .hero__title {
+        font-size: 25.6vw;
+    }
 }
 </style>
