@@ -115,7 +115,6 @@ const emit = defineEmits<{
             <h1 class="hero__title" aria-hidden="true">
                 <span v-for="letter in 'KINNOR'.split('')" :key="letter" class="hero-letter">{{ letter }}</span>
             </h1>
-            <!-- <span class="hero__script">COFFEE</span> -->
             <span
                 class="hero__script"
                 :class="`hero__script--peel-${stickerOrientation.peelCorner}`"
@@ -139,6 +138,14 @@ const emit = defineEmits<{
                 <span class="hero__script-peel" aria-hidden="true" />
                 <span class="hero__script-impact" aria-hidden="true" />
             </span>
+        </div>
+
+        <div class="hero__plane">
+            <div class="orbit-seal" aria-hidden="true">
+                <div class="orbit-copy">COFFEE • COCKTAILS • COMMUNITY • KINNOR •&nbsp;</div>
+                <span>✦</span>
+            </div>
+            <div class="hero-sticker" aria-hidden="true">GOOD<br />IN PERSON</div>
         </div>
 
     </section>
@@ -228,81 +235,6 @@ const emit = defineEmits<{
     will-change: opacity, transform;
 }
 
-/* .hero__script { */
-    /* --sticker-left: 39%;
-    --sticker-top: 44%; */
-    /* --sticker-resting-rotation: -6deg; */
-    /* position: absolute;
-    z-index: 4;
-    left: var(--sticker-left);
-    top: var(--sticker-top); */
-
-    /* display: inline-block; */
-    /* padding: .1em .28em .18em; */
-
-    /* font-family: "Fraunces", serif;
-    font-size: clamp(2rem, 6vw, 6rem);
-    font-style: italic;
-    color: var(--ink);
-    background: var(--lime);
-    padding: .1em .28em .18em;
-    border: 2px solid var(--ink);
-    box-shadow: 7px 7px 0 var(--orange);
-    font-weight: 300;
-    line-height: 1; */
-
-    /* transform: rotate(var(--sticker-resting-rotation)); */
-    /* transform-style: preserve-3d; */
-    /* will-change: opacity, transform; */
-
-    /* basic variation 1 right aligned */
-    /* left: 30%; */
-    /* top: 89%; */
-
-    /* basic variation 2 left aligned */
-    /* left: 1%; */
-    /* top: 89%; */
-
-    /* like someone just slapped a fuckin' sticker on that bitch */
-    /* transform: rotate(-6deg); */
-    /* left: 41%; */
-    /* top: 45%; */
-
-    /* Also, sort of interesting */
-    /* transform: rotate(-6deg); */
-    /* left: 25%; */
-    /* top: 45%; */
-
-    /* A bit different than the others... */
-    /* transform: rotate(-6deg); */
-    /* left: 16%; */
-    /* top: 28%; */
-
-/* } */
-
-/* .hero__script {
-    --sticker-resting-rotation: -6deg;
-    position: absolute;
-    z-index: 4;
-    left: 39%;
-    top: 44%;
-    display: inline-block;
-    padding: .1em .28em .18em;
-    color: var(--ink);
-    background: var(--lime);
-    border: 2px solid var(--ink);
-    box-shadow: 7px 7px 0 var(--orange);
-    font-family: "Fraunces", serif;
-    font-size: clamp(2rem, 6vw, 6rem);
-    font-style: italic;
-    font-weight: 300;
-    line-height: 1;
-    isolation: isolate;
-    transform: rotate(var(--sticker-resting-rotation));
-    transform-style: preserve-3d;
-    will-change: opacity, transform;
-} */
-
 .hero__script::before {
     content: "";
     position: absolute;
@@ -369,6 +301,64 @@ const emit = defineEmits<{
     opacity: 0;
 }
 
+.hero__plane {
+    position: absolute;
+    inset: 8rem 0 auto;
+    height: 60%;
+    pointer-events: none;
+}
+
+.orbit-seal {
+    position: absolute;
+    right: 6vw;
+    top: 3vh;
+    width: clamp(130px, 15vw, 220px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--cream);
+    border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 9px 9px 0 var(--ink);
+}
+
+.orbit-seal > span {
+    font-size: 2.3rem;
+}
+
+.orbit-copy {
+    position: absolute;
+    inset: 8px;
+    display: grid;
+    place-items: start center;
+    padding-top: 3rem;
+    padding-left: 1rem;
+    border: 1px dashed var(--ink);
+    border-radius: 50%;
+    color: var(--ink);
+    font-size: .59rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+}
+
+.hero-sticker {
+    position: absolute;
+    right: 5vw;
+    bottom: -7vh;
+    width: 120px;
+    padding: 1.2rem .6rem;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    background: var(--pink);
+    box-shadow: 7px 7px 0 var(--lime);
+    font-family: "Syne", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    line-height: .9;
+    text-align: center;
+    transform: rotate(8deg);
+}
+
 @media (max-width: 900px) {
     .hero {
         min-height: 880px;
@@ -387,6 +377,16 @@ const emit = defineEmits<{
     .hero-sticker {
         right: 8vw;
         bottom: 4vh;
+    }
+
+    .hero__plane {
+        font-size: 26vw;
+        line-height: .8;
+    }
+
+    .orbit-seal {
+        right: 2vw;
+        top: 11vh;
     }
 }
 
@@ -414,6 +414,11 @@ const emit = defineEmits<{
         bottom: 13vh;
         width: 92px;
         font-size: .82rem;
+    }
+
+    .orbit-seal {
+        top: 16vh;
+        width: 115px;
     }
 }
 </style>
