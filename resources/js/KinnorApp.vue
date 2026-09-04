@@ -205,6 +205,13 @@ onMounted(async () => {
                 0.59,
             );
         }
+
+        gsap.to(".orbit-copy", {
+            rotate: 360,
+            duration: 22,
+            repeat: -1,
+            ease: "none",
+        });
     }
 
     }, root.value);
