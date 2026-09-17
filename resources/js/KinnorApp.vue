@@ -5,6 +5,8 @@ import SiteNavigation from "./components/SiteNavigation.vue";
 import HeroSection from "./components/HeroSection.vue";
 import AppEffects from "./components/AppEffects.vue";
 import SiteFooter from "./components/SiteFooter.vue";
+import MenuSection from "./components/MenuSection.vue";
+import VisitUs from "./components/VisitUs.vue";
 
 const root = ref<HTMLElement | null>(null);
 
@@ -268,6 +270,9 @@ onBeforeUnmount(() => {
 
         <main>
             <HeroSection @navigate="scrollToSection" />
+
+            <MenuSection />
+            <VisitUs />
         </main>
 
         <SiteFooter @navigate="scrollToSection" />
