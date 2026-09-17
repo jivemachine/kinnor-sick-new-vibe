@@ -448,6 +448,7 @@ const emit = defineEmits<{
 .hero__actions > p {
     max-width: 205px;
     margin: 0;
+    padding-top: 3rem;
     font-size: .62rem;
     line-height: 1.5;
     letter-spacing: .05em;
