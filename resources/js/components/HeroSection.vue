@@ -151,17 +151,22 @@ const emit = defineEmits<{
         </div>
 
         <div class="hero__footer">
-            <p class="hero__subcopy">
+            <!-- <p class="hero__subcopy">
                 A tiny family-owned coffee shop.<br />
                 A craft cocktail lounge.<br />
                 A very good excuse to stay awhile.
+            </p> -->
+            <p class="hero__subcopy">
+                A tiny family-owned coffee shop.<br />
+                A craft cocktail lounge.<br />
+                For the sake of doing well a thing that is well worth doing.
             </p>
             <div class="hero__actions">
                 <button class="round-cta" @click="emit('navigate', 'visit')">
                     <span>COME<br />THROUGH</span>
                     <b>↘</b>
                 </button>
-                <p><strong>OPEN TODAY?</strong><br />Check the hours below. Tuesday takes the day off.</p>
+                <p><strong>OPEN TODAY?</strong><br />Check the hours below. Tuesday we're closed to hit the river!</p>
             </div>
         </div>
 
@@ -427,7 +432,7 @@ const emit = defineEmits<{
 }
 
 .hero__subcopy {
-    max-width: 32rem;
+    max-width: 36rem;
     margin: 0;
     font-family: "Fraunces", serif;
     font-size: clamp(1rem, 1.55vw, 1.5rem);
@@ -592,7 +597,7 @@ const emit = defineEmits<{
     }
 
     .hero__subcopy {
-        max-width: 14rem;
+        max-width: 15rem;
         font-size: 1rem;
     }
 }
