@@ -368,7 +368,7 @@ const emit = defineEmits<{
     position: absolute;
     right: 5vw;
     bottom: -7vh;
-    width: 120px;
+    width: 148px;
     padding: 1.2rem .6rem;
     color: var(--ink);
     border: 2px solid var(--ink);
@@ -562,7 +562,7 @@ const emit = defineEmits<{
     }
 
     .round-cta {
-        width: 102px;
+        width: 130px;
     }
 }
 
@@ -588,8 +588,8 @@ const emit = defineEmits<{
 
     .hero-sticker {
         bottom: 13vh;
-        width: 92px;
-        font-size: .82rem;
+        width: 115px;
+        font-size: .75rem;
     }
 
     .orbit-seal {
