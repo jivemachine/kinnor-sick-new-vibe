@@ -24,10 +24,8 @@ const emit = defineEmits<{
 
         <nav class="nav-links" aria-label="Primary navigation">
             <!-- <button @click="emit('navigate', 'story')">Story</button> -->
-            <!-- <button @click="emit('navigate', 'menu')">Menu-ish</button> -->
-            <!-- <button @click="emit('navigate', 'visit')">Visit</button> -->
-            <button>Menu-ish</button>
-            <button>Visit</button>
+            <button @click="emit('navigate', 'menu')">Menu-ish</button>
+            <button @click="emit('navigate', 'visit')">Visit</button>
         </nav>
 
         <button
