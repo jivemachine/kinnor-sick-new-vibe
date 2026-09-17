@@ -145,9 +145,27 @@ const emit = defineEmits<{
                 <div class="orbit-copy">COFFEE • COCKTAILS • COMMUNITY • KINNOR •&nbsp;</div>
                 <span>✦</span>
             </div>
+            <div class="bean bean--one" aria-hidden="true" />
+            <div class="bean bean--two" aria-hidden="true" />
             <div class="hero-sticker" aria-hidden="true">GOOD<br />IN PERSON</div>
         </div>
 
+        <div class="hero__footer">
+            <p class="hero__subcopy">
+                A tiny family-owned coffee shop.<br />
+                A craft cocktail lounge.<br />
+                A very good excuse to stay awhile.
+            </p>
+            <div class="hero__actions">
+                <button class="round-cta" @click="emit('navigate', 'visit')">
+                    <span>COME<br />THROUGH</span>
+                    <b>↘</b>
+                </button>
+                <p><strong>OPEN TODAY?</strong><br />Check the hours below. Tuesday takes the day off.</p>
+            </div>
+        </div>
+
+        <!-- <div class="scroll-cue" aria-hidden="true">SCROLL / STAY CURIOUS <span>↓</span></div> -->
     </section>
 </template>
 
@@ -359,6 +377,137 @@ const emit = defineEmits<{
     transform: rotate(8deg);
 }
 
+.bean {
+    position: absolute;
+    width: 54px;
+    height: 82px;
+    border: 2px solid var(--ink);
+    border-radius: 48% 52% 45% 55%;
+    background: var(--pink);
+    box-shadow: 7px 7px 0 var(--ink);
+    animation: bean-float 4.8s ease-in-out infinite;
+}
+
+.bean::after {
+    content: "";
+    position: absolute;
+    left: 48%;
+    top: 8%;
+    bottom: 8%;
+    width: 2px;
+    background: var(--ink);
+    transform: rotate(10deg);
+}
+
+.bean--one {
+    left: 9vw;
+    top: 5vh;
+    transform: rotate(-25deg);
+}
+
+.bean--two {
+    right: 22vw;
+    bottom: 1vh;
+    width: 38px;
+    height: 58px;
+    background: var(--lime);
+    transform: rotate(32deg);
+    animation-delay: -2s;
+}
+
+.hero__footer {
+    position: absolute;
+    left: 3vw;
+    right: 3vw;
+    bottom: 3.6rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.hero__subcopy {
+    max-width: 32rem;
+    margin: 0;
+    font-family: "Fraunces", serif;
+    font-size: clamp(1rem, 1.55vw, 1.5rem);
+    line-height: 1.24;
+}
+
+.hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.hero__actions > p {
+    max-width: 205px;
+    margin: 0;
+    font-size: .62rem;
+    line-height: 1.5;
+    letter-spacing: .05em;
+}
+
+.round-cta {
+    width: 116px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: var(--ink) !important;
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    background: var(--lime);
+    box-shadow: 7px 7px 0 var(--ink);
+    cursor: pointer;
+    transition: border-radius .3s, transform .3s, background .3s;
+}
+
+.round-cta:hover {
+    border-radius: 8%;
+    background: var(--pink);
+    transform: rotate(-6deg) scale(1.05);
+}
+
+.round-cta span {
+    font-family: "Syne", sans-serif;
+    font-size: .74rem;
+    font-weight: 800;
+    line-height: 1;
+    text-align: left;
+}
+
+.round-cta b {
+    font-size: 1.5rem;
+}
+
+.scroll-cue {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    font-size: .58rem;
+    letter-spacing: .12em;
+    transform: translateX(-50%);
+}
+
+.scroll-cue span {
+    display: inline-block;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bean-float {
+    50% {
+        translate: 0 -16px;
+        rotate: 9deg;
+    }
+}
+
+@keyframes bounce {
+    50% {
+        transform: translateY(7px);
+    }
+}
+
 @media (max-width: 900px) {
     .hero {
         min-height: 880px;
@@ -387,6 +536,32 @@ const emit = defineEmits<{
     .orbit-seal {
         right: 2vw;
         top: 11vh;
+    }
+
+    .bean--one {
+        top: 21vh;
+    }
+
+    .hero__footer {
+        bottom: 4.4rem;
+        display: grid;
+    }
+
+    .hero__subcopy {
+        max-width: 14rem;
+        font-size: 1rem;
+    }
+
+    .hero__actions {
+        justify-content: space-between;
+    }
+
+    .hero__actions > p {
+        display: none;
+    }
+
+    .round-cta {
+        width: 102px;
     }
 }
 
