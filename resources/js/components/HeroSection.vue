@@ -163,7 +163,7 @@ const emit = defineEmits<{
             </p>
             <div class="hero__actions">
                 <button class="round-cta" @click="emit('navigate', 'visit')">
-                    <span>COME<br />THROUGH</span>
+                    <span>COME ON<br />THROUGH</span>
                     <b>↘</b>
                 </button>
                 <p><strong>OPEN TODAY?</strong><br />Check the hours below. Tuesday we're closed to hit the river!</p>
@@ -454,7 +454,7 @@ const emit = defineEmits<{
 }
 
 .round-cta {
-    width: 116px;
+    width: 130px;
     aspect-ratio: 1;
     display: flex;
     align-items: center;
