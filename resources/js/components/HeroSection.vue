@@ -156,16 +156,16 @@ const emit = defineEmits<{
         </div>
 
         <div class="hero__footer">
-            <p class="hero__subcopy">
-                A tiny family-owned coffee shop.<br />
-                A craft cocktail lounge.<br />
-                Let me tell you a story about my sisters<br>ex-husband.
-            </p>
             <!-- <p class="hero__subcopy">
                 A tiny family-owned coffee shop.<br />
                 A craft cocktail lounge.<br />
-                A good excuse to stay awhile.
+                Let me tell you a story about my sisters<br>ex-husband.
             </p> -->
+            <p class="hero__subcopy">
+                A tiny family-owned coffee shop.<br />
+                A craft cocktail lounge.<br />
+                A good excuse to stay awhile.
+            </p>
             <!-- <p class="hero__subcopy">
                 A tiny family-owned coffee shop.<br />
                 A craft cocktail lounge.<br />
