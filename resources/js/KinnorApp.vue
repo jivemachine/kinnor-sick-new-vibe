@@ -266,7 +266,7 @@ onBeforeUnmount(() => {
         />
 
         <main>
-            <HeroSection />
+            <HeroSection @navigate="scrollToSection" />
         </main>
 
     </div>
