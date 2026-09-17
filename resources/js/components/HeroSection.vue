@@ -156,16 +156,21 @@ const emit = defineEmits<{
         </div>
 
         <div class="hero__footer">
-            <!-- <p class="hero__subcopy">
-                A tiny family-owned coffee shop.<br />
-                A craft cocktail lounge.<br />
-                A very good excuse to stay awhile.
-            </p> -->
             <p class="hero__subcopy">
                 A tiny family-owned coffee shop.<br />
                 A craft cocktail lounge.<br />
-                For the sake of doing well a thing that is well worth doing.
+                Let me tell you a story about my sisters<br>ex-husband.
             </p>
+            <!-- <p class="hero__subcopy">
+                A tiny family-owned coffee shop.<br />
+                A craft cocktail lounge.<br />
+                A good excuse to stay awhile.
+            </p> -->
+            <!-- <p class="hero__subcopy">
+                A tiny family-owned coffee shop.<br />
+                A craft cocktail lounge.<br />
+                For the sake of doing well a thing that is well worth doing.
+            </p> -->
             <div class="hero__actions">
                 <button class="round-cta" @click="emit('navigate', 'visit')">
                     <span>COME ON<br />THROUGH</span>
@@ -439,7 +444,7 @@ const emit = defineEmits<{
 }
 
 .hero__subcopy {
-    max-width: 36rem;
+    max-width: 32rem;
     margin: 0;
     font-family: "Fraunces", serif;
     font-size: clamp(1rem, 1.55vw, 1.5rem);
