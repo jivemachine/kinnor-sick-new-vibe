@@ -142,7 +142,12 @@ const emit = defineEmits<{
 
         <div class="hero__plane">
             <div class="orbit-seal" aria-hidden="true">
-                <div class="orbit-copy">COFFEE • COCKTAILS • COMMUNITY • KINNOR •&nbsp;</div>
+                <!-- <div class="orbit-copy">COFFEE • COCKTAILS • COMMUNITY • KINNOR •&nbsp;</div> -->
+                <!-- <div class="orbit-copy"><span>• COFFEE • COCKTAILS •</span><br><span>• COMMUNITY • KINNOR •</span></div> -->
+                <!-- <div class="orbit-copy"><span>COFFEE&nbsp; • COCKTAILS</span><br><span>COMMUNITY • KINNOR</span></div> -->
+                <div class="orbit-copy"><span>COFFEE • COMMUNITY</span><br><span>KINNOR • COCKTAILS</span></div>
+                <!-- <div class="orbit-copy">• COFFEE • COCKTAILS •</div> -->
+                <!-- <div class="orbit-copy-bottom">• COMMUNITY • KINNOR •</div> -->
                 <span>✦</span>
             </div>
             <div class="bean bean--one" aria-hidden="true" />
@@ -171,6 +176,7 @@ const emit = defineEmits<{
         </div>
 
         <!-- <div class="scroll-cue" aria-hidden="true">SCROLL / STAY CURIOUS <span>↓</span></div> -->
+        <div class="scroll-cue" aria-hidden="true">THERE'S MORE DOWN SOUTH <span>↓</span></div>
     </section>
 </template>
 
@@ -351,11 +357,12 @@ const emit = defineEmits<{
 
 .orbit-copy {
     position: absolute;
-    inset: 8px;
+    inset: 2px;
     display: grid;
     place-items: start center;
-    padding-top: 3rem;
-    padding-left: 1rem;
+    padding-top: 4rem;
+    padding-left: .3rem;
+    padding-bottom: 3rem;
     border: 1px dashed var(--ink);
     border-radius: 50%;
     color: var(--ink);
@@ -564,6 +571,22 @@ const emit = defineEmits<{
     .round-cta {
         width: 130px;
     }
+
+     .orbit-copy {
+        /* position: absolute; */
+        inset: 2px;
+        display: grid;
+        place-items: start center;
+        padding-top: 2.15rem;
+        padding-left: 0rem;
+        padding-bottom: 1rem;
+        border: 1px dashed var(--ink);
+        border-radius: 50%;
+        color: var(--ink);
+        font-size: .45rem;
+        font-weight: 700;
+        letter-spacing: .16em;
+    }
 }
 
 @media (max-width: 560px) {
@@ -600,6 +623,22 @@ const emit = defineEmits<{
     .hero__subcopy {
         max-width: 15rem;
         font-size: 1rem;
+    }
+
+    .orbit-copy {
+        /* position: absolute; */
+        inset: 2px;
+        display: grid;
+        place-items: start center;
+        padding-top: 2.15rem;
+        padding-left: 0rem;
+        padding-bottom: 1rem;
+        border: 1px dashed var(--ink);
+        border-radius: 50%;
+        color: var(--ink);
+        font-size: .40rem;
+        font-weight: 700;
+        letter-spacing: .16em;
     }
 }
 </style>
