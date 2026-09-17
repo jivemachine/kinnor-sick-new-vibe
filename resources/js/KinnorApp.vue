@@ -3,6 +3,7 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 import IntroLoader from "./components/IntroLoader.vue";
 import SiteNavigation from "./components/SiteNavigation.vue";
 import HeroSection from "./components/HeroSection.vue";
+import AppEffects from "./components/AppEffects.vue";
 
 const root = ref<HTMLElement | null>(null);
 
@@ -46,6 +47,30 @@ onMounted(async () => {
     const [{ gsap }] = await Promise.all([
         import("gsap"),
     ]);
+
+    const cursor = root.value.querySelector<HTMLElement>(".cursor-orb");
+    const moveCursorX = cursor
+        ? gsap.quickTo(cursor, "x", { duration: 0.42, ease: "power3" })
+        : undefined;
+    const moveCursorY = cursor
+        ? gsap.quickTo(cursor, "y", { duration: 0.42, ease: "power3" })
+        : undefined;
+
+    const updatePointerEffects = (event: MouseEvent) => {
+        moveCursorX?.(event.clientX);
+        moveCursorY?.(event.clientY);
+
+        root.value?.style.setProperty(
+            "--pointer-x",
+            `${(event.clientX / window.innerWidth) * 100}%`,
+        );
+        root.value?.style.setProperty(
+            "--pointer-y",
+            `${(event.clientY / window.innerHeight) * 100}%`,
+        );
+    }
+
+    window.addEventListener("pointermove", updatePointerEffects, { passive: true });
 
     gsapContext = gsap.context(() => {
         const loader = gsap.timeline({
@@ -229,6 +254,8 @@ onBeforeUnmount(() => {
         ref="root"
         class="kinnor-shell relative min-h-screen overflow-x-clip"
     >
+        <AppEffects />
+
         <IntroLoader />
 
         <SiteNavigation
