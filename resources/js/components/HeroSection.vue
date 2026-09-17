@@ -547,11 +547,6 @@ const emit = defineEmits<{
         display: grid;
     }
 
-    .hero__subcopy {
-        max-width: 14rem;
-        font-size: 1rem;
-    }
-
     .hero__actions {
         justify-content: space-between;
     }
@@ -594,6 +589,11 @@ const emit = defineEmits<{
     .orbit-seal {
         top: 16vh;
         width: 115px;
+    }
+
+    .hero__subcopy {
+        max-width: 14rem;
+        font-size: 1rem;
     }
 }
 </style>
