@@ -8,7 +8,7 @@ import { businessHours } from "../content/kinnor";
             <span>COME SAY HI ✦ COME SAY HI ✦</span>
         </div>
 
-        <div class="visit-title">
+        <div class="visit-title" data-reveal>
             <span>GOOD THINGS</span>
             <h2>HAPPEN<br /><em>OFFLINE.</em></h2>
         </div>
@@ -25,7 +25,7 @@ import { businessHours } from "../content/kinnor";
                 <i>OPEN MAPS ↗</i>
             </a>
 
-            <div class="hours-card">
+            <div class="hours-card" data-reveal>
                 <div class="hours-card__head">
                     <span>HOURS / WEEKLY</span>
                     <b>CST</b>
