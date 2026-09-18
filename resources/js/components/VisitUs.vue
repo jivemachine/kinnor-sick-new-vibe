@@ -1,4 +1,5 @@
-<script lang="ts">
+<script setup lang="ts">
+import { businessHours } from "../content/kinnor";
 </script>
 
 <template>
@@ -9,7 +10,38 @@
 
         <div class="visit-title">
             <span>GOOD THINGS</span>
-            <!-- <h2>HAPPEN<br /><em>OFFLINE.</em></h2> -->
+            <h2>HAPPEN<br /><em>OFFLINE.</em></h2>
+        </div>
+
+        <div class="visit-grid">
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=540+S+Castell+Ave+New+Braunfels+TX+78130"
+                class="address-card"
+                target="_blank"
+                rel="noreferrer"
+            >
+                <span>FIND THE BLUE DOOR</span>
+                <strong>540 S CASTELL AVE<br />NEW BRAUNFELS, TX<br />78130</strong>
+                <i>OPEN MAPS ↗</i>
+            </a>
+
+            <div class="hours-card">
+                <div class="hours-card__head">
+                    <span>HOURS / WEEKLY</span>
+                    <b>CST</b>
+                </div>
+                <div
+                    v-for="day in businessHours"
+                    :key="day[0]"
+                    class="hours-row"
+                    :class="{ closed: day[1] === 'CLOSED' }"
+                >
+                    <span>{{ day[0] }}</span>
+                    <i></i>
+                    <strong>{{ day[1] }}</strong>
+
+                </div>
+            </div>
         </div>
     </section>
 
@@ -74,6 +106,86 @@
     font-weight: 300;
 }
 
+.visit-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    align-items: stretch;
+    gap: 1.5rem;
+    margin-top: 5rem;
+}
+
+.address-card {
+    min-height: 480px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.6rem;
+    color: var(--ink) !important;
+    background: var(--pink);
+    box-shadow: 10px 10px 0 var(--ink);
+    text-decoration: none;
+    transform: rotate(-1.2deg);
+    transition: transform .3s, background .3s;
+}
+
+.address-card:hover {
+    background: var(--lime);
+    transform: rotate(1deg) translateY(-8px);
+}
+
+.address-card > span,
+.address-card i {
+    font-size: .65rem;
+    font-style: normal;
+    letter-spacing: .08em;
+}
+
+.address-card strong {
+    font-family: "Syne", sans-serif;
+    font-size: clamp(2.2rem, 4vw, 4.6rem);
+    font-weight: 800;
+    line-height: .9;
+}
+
+.address-card,
+.hours-card {
+    border: 2px solid var(--cream);
+}
+
+.hours-card {
+    padding: 1.6rem;
+    background: var(--blue-dark);
+}
+
+.hours-card__head {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 2.4rem;
+    font-size: .65rem;
+}
+
+.hours-row {
+    display: grid;
+    grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.06rem 0;
+    border-top: 1px solid rgba(244, 240, 232, .45);
+    font-size: clamp(.72rem, 1.2vw, 1rem);
+}
+
+.hours-row i {
+    height: 1px;
+    background-image: linear-gradient(to right, var(--cream) 50%, transparent 50%);
+    background-size: 8px 1px;
+    opacity: .6;
+}
+
+.hours-row.closed strong {
+    color: var(--pink);
+}
+
+
 @media (max-width: 900px) {
     .visit-section {
         padding: 7rem 1.25rem;
@@ -84,6 +196,14 @@
         width: 170px;
         opacity: .75;
     }
+
+    .visit-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .address-card {
+        min-height: 370px;
+    }
 }
 
 @media (max-width: 560px) {
@@ -93,6 +213,18 @@
 
     .visit-title h2 {
         font-size: 24vw;
+    }
+
+    .address-card strong {
+        font-size: 2.15rem;
+    }
+
+    .hours-card {
+        padding: 1.1rem;
+    }
+
+    .hours-row {
+        gap: .6rem;
     }
 }
 
