@@ -7,6 +7,7 @@ import AppEffects from "./components/AppEffects.vue";
 import SiteFooter from "./components/SiteFooter.vue";
 import MenuSection from "./components/MenuSection.vue";
 import VisitUs from "./components/VisitUs.vue";
+import MotionTicker from "./components/MotionTicker.vue";
 
 const root = ref<HTMLElement | null>(null);
 
@@ -271,7 +272,14 @@ onBeforeUnmount(() => {
         <main>
             <HeroSection @navigate="scrollToSection" />
 
+            <MotionTicker
+                message="FUCKiN ✦ LOREM ✦ IPSUM ✦"
+            />
             <MenuSection />
+            <MotionTicker
+                message="I haven't decided if I think this is cool or not...  ✺ "
+                tone="pink"
+            />
             <VisitUs />
         </main>
 
