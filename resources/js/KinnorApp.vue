@@ -281,6 +281,14 @@ onBeforeUnmount(() => {
                 tone="pink"
             />
             <VisitUs />
+            <MotionTicker
+                message="TWO SPINNY THINGS, ONE PAGE✦ ✦ ✦"
+            />
+            <MotionTicker
+                message="DON'T TALK TO ME ✦ ✦ ✦"
+                tone="pink"
+                reverse
+            />
         </main>
 
         <SiteFooter @navigate="scrollToSection" />
