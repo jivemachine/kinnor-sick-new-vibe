@@ -274,7 +274,7 @@ onBeforeUnmount(() => {
             <HeroSection @navigate="scrollToSection" />
 
             <MotionTicker
-                message="FUCKiN ✦ LOREM ✦ IPSUM ✦"
+                message="&nbsp;✦ LOREM ✦ FUCKiN ✦ IPSUM"
             />
 
             <StorySection @navigate="scrollToSection" />
@@ -282,18 +282,18 @@ onBeforeUnmount(() => {
             <MenuSection />
 
             <MotionTicker
-                message="I haven't decided if I think this is cool or not...  ✺ "
+                message="&nbsp;I haven't decided if I think this is cool or not...  ✺ "
                 tone="pink"
             />
 
             <VisitUs />
 
             <MotionTicker
-                message="TWO SPINNY THINGS, ONE PAGE✦ ✦ ✦"
+                message="&nbsp;TWO SPINNY THINGS, ONE PAGE✦ ✦ ✦"
             />
 
             <MotionTicker
-                message="DON'T TALK TO ME ✦ ✦ ✦"
+                message="&nbsp;DON'T TALK TO ME ✦ ✦ ✦"
                 tone="pink"
                 reverse
             />
