@@ -102,7 +102,6 @@ const currentYear = new Date().getFullYear();
     .footer-word {
         font-size: 29vw;
         display: none;
-        margin-bottom: 1rem;
     }
 
     .footer-bottom {
@@ -111,6 +110,10 @@ const currentYear = new Date().getFullYear();
 
     .footer-bottom span:nth-of-type(2) {
         display: none;
+    }
+
+    .footer-top {
+        margin-bottom: 3rem;
     }
 }
 
