@@ -5,7 +5,17 @@ import { menuFrames } from "../content/kinnor";
 <template>
     <section id="menu" class="menu-section">
         <div class="menu-orbit" aria-hidden="true">MENU MENU MENU MENU MENU MENU</div>
-        <div class="menu-orbit-lol" aria-hidden="true">MENU MENU MENU MENU MENU MENU</div>
+
+        <div class="menu-intro">
+            <div class="section-label" data-reveal><span>02</span> THE NEXT POUR</div>
+            <h2 data-reveal><p>SOMETIMES</p>THINGS <em>CHANGE.</em></h2>
+            <p data-reveal>
+                Put those TPS reports in the shredder, take a break from the office,
+                and come sit down for awhile.
+            </p>
+        </div>
+
+        <!-- <div class="menu-orbit-lol" aria-hidden="true">MENU MENU MENU MENU MENU MENU</div> -->
 
         <div class="menu-frames">
             <article
@@ -15,15 +25,15 @@ import { menuFrames } from "../content/kinnor";
                 data-reveal
             >
                 <div class="menu-frame__top">
-                    <!-- <span>{{ frame.number }}</span> -->
-                    <!-- <i>{{ frame.availability }}</i> -->
+                    <span>{{ frame.number }}</span>
+                    <i>{{ frame.availability }}</i>
                 </div>
                 <h3>{{ frame.label }}</h3>
-                <!-- <p>{{ frame.note }}</p> -->
-                <!-- <div class="menu-frame__placeholder">
+                <p>{{ frame.note }}</p>
+                <div class="menu-frame__placeholder">
                     <span v-for="line in 3" :key="line">ITEM NAME <i>··········</i> $—</span>
-                </div> -->
-                <!-- <button disabled>FULL MENU / SOON</button> -->
+                </div>
+                <button disabled>FULL MENU / SOON</button>
             </article>
         </div>
 
@@ -153,6 +163,63 @@ import { menuFrames } from "../content/kinnor";
     letter-spacing: .1em;
 }
 
+.menu-intro {
+    display: grid;
+    grid-template-columns: 1fr 2.1fr .7fr;
+    align-items: end;
+    gap: 2rem;
+    margin-bottom: 5rem;
+}
+
+.menu-intro h2 {
+    margin: 0;
+    font-family: "Bebas Neue", Impact, sans-serif;
+    font-size: clamp(5rem, 10vw, 10rem);
+    font-weight: 400;
+    line-height: .8;
+    letter-spacing: -.025em;
+}
+
+.menu-intro h2 em {
+    color: var(--orange);
+    font-family: "Fraunces", serif;
+    font-size: .72em;
+    font-weight: 300;
+}
+
+.menu-intro h2 p {
+    text-align: center;
+}
+
+.menu-intro > p {
+    max-width: 27rem;
+    margin: 0;
+    padding-top: 1rem;
+    font-size: .76rem;
+    line-height: 1.65;
+}
+
+.section-label {
+    display: flex;
+    align-items: center;
+    align-self: start;
+    gap: 1rem;
+    margin: 0;
+    font-size: .68rem;
+    letter-spacing: .16em;
+}
+
+.section-label span {
+    width: 34px;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    color: var(--cream);
+    border-radius: 50%;
+    background: var(--ink);
+}
+
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -178,6 +245,20 @@ import { menuFrames } from "../content/kinnor";
 
     .menu-frame:nth-child(2) {
         transform: rotate(1.2deg);
+    }
+
+    .menu-intro {
+        grid-template-columns: 1fr;
+    }
+
+    .section-label {
+        margin-bottom: 3rem;
+    }
+}
+
+@media (max-width: 560px) {
+    .menu-intro h2 {
+        font-size: 22vw;
     }
 }
 </style>
