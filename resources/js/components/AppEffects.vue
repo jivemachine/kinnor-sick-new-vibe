@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <div class="cursor-orb" aria-hidden="true"></div>
+    <div class="cursor-orb" aria-hidden="true"><span>POUR</span></div>
 </template>
 
 <style scoped>
@@ -21,6 +21,10 @@
     color: var(--ink);
     background: var(--lime);
     mix-blend-mode: difference;
+    place-items: center;
+    font-size: 0.54rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
 }
 
 @media (max-width: 900px) {
