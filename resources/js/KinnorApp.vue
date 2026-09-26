@@ -9,6 +9,7 @@ import MenuSection from "./components/MenuSection.vue";
 import VisitUs from "./components/VisitUs.vue";
 import MotionTicker from "./components/MotionTicker.vue";
 import StorySection from "./components/StorySection.vue";
+import MoodSection from "./components/MoodSection.vue";
 
 const root = ref<HTMLElement | null>(null);
 
@@ -273,20 +274,20 @@ onBeforeUnmount(() => {
         <main>
             <HeroSection @navigate="scrollToSection" />
 
+            <StorySection @navigate="scrollToSection" />
+
             <MotionTicker
                 message="&nbsp;✦ LOREM ✦ FUCKiN ✦ IPSUM"
             />
 
-            <StorySection @navigate="scrollToSection" />
-
-            <MenuSection />
+            <MoodSection />
 
             <MotionTicker
                 message="&nbsp;I haven't decided if I think this is cool or not...  ✺ "
                 tone="pink"
             />
 
-            <VisitUs />
+            <MenuSection />
 
             <MotionTicker
                 message="&nbsp;TWO SPINNY THINGS, ONE PAGE✦ ✦ ✦"
@@ -298,6 +299,7 @@ onBeforeUnmount(() => {
                 reverse
             />
 
+            <VisitUs />
         </main>
 
         <SiteFooter @navigate="scrollToSection" />
