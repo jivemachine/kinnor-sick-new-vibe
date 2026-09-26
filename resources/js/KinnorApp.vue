@@ -8,6 +8,7 @@ import SiteFooter from "./components/SiteFooter.vue";
 import MenuSection from "./components/MenuSection.vue";
 import VisitUs from "./components/VisitUs.vue";
 import MotionTicker from "./components/MotionTicker.vue";
+import StorySection from "./components/StorySection.vue";
 
 const root = ref<HTMLElement | null>(null);
 
@@ -275,20 +276,28 @@ onBeforeUnmount(() => {
             <MotionTicker
                 message="FUCKiN ✦ LOREM ✦ IPSUM ✦"
             />
+
+            <StorySection @navigate="scrollToSection" />
+
             <MenuSection />
+
             <MotionTicker
                 message="I haven't decided if I think this is cool or not...  ✺ "
                 tone="pink"
             />
+
             <VisitUs />
+
             <MotionTicker
                 message="TWO SPINNY THINGS, ONE PAGE✦ ✦ ✦"
             />
+
             <MotionTicker
                 message="DON'T TALK TO ME ✦ ✦ ✦"
                 tone="pink"
                 reverse
             />
+
         </main>
 
         <SiteFooter @navigate="scrollToSection" />
