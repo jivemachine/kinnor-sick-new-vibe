@@ -19,7 +19,7 @@ const currentYear = new Date().getFullYear();
 
         <div class="footer-bottom">
             <span>SMALL SHOP. BIG FEELING.</span>
-            <span class="hidden min-[900px]:inline">COZY. COFFEE. COMFORTABLE. KINNOR.</span>
+            <span>COZY. COFFEE. COMFORTABLE. KINNOR.</span>
             <span>© {{ currentYear }} KINNOR COFFEE</span>
         </div>
     </footer>
@@ -102,13 +102,14 @@ const currentYear = new Date().getFullYear();
     .footer-word {
         font-size: 29vw;
         display: none;
+        margin-bottom: 1rem;
     }
 
     .footer-bottom {
         gap: 1rem;
     }
 
-    .footer-bottom span:first-child {
+    .footer-bottom span:nth-of-type(2) {
         display: none;
     }
 }
