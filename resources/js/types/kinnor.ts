@@ -6,3 +6,12 @@ export type MenuFrame = {
     note: string;
     availability: string;
 };
+
+export type Mood = {
+    id: string;
+    time: string;
+    title: string;
+    note: string;
+    color: string;
+    frequency: string;
+};
