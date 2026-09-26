@@ -15,3 +15,10 @@ export type Mood = {
     color: string;
     frequency: string;
 };
+
+export type ClickBurst = {
+    id: number;
+    x: number;
+    y: number;
+    glyph: string;
+};
