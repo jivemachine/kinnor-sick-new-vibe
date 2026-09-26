@@ -7,7 +7,7 @@ import { menuFrames } from "../content/kinnor";
         <div class="menu-orbit" aria-hidden="true">MENU MENU MENU MENU MENU MENU</div>
 
         <div class="menu-intro">
-            <div class="section-label" data-reveal><span>02</span> THE NEXT POUR</div>
+            <div class="section-label" data-reveal><span>03</span> THE NEXT POUR</div>
             <h2 data-reveal><p>SOMETIMES</p>THINGS <em>CHANGE.</em></h2>
             <p data-reveal>
                 Put those TPS reports in the shredder, take a break from the office,
@@ -253,6 +253,10 @@ import { menuFrames } from "../content/kinnor";
 
     .section-label {
         margin-bottom: 3rem;
+    }
+
+    .menu-intro h2 p {
+        text-align: left;
     }
 }
 
