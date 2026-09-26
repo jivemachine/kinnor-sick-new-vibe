@@ -10,12 +10,14 @@ import VisitUs from "./components/VisitUs.vue";
 import MotionTicker from "./components/MotionTicker.vue";
 import StorySection from "./components/StorySection.vue";
 import MoodSection from "./components/MoodSection.vue";
+import type { ClickBurst } from "./types/kinnor";
 
 const root = ref<HTMLElement | null>(null);
 
 const isNavigationOpen = ref(false);
 const showIntro = ref(true);
 const clock = ref("");
+const bursts = ref<ClickBurst[]>([]);
 
 let clockTimer: ReturnType<typeof setInterval> | undefined;
 let gsapContext: { revert: () => void } | undefined;
@@ -41,6 +43,28 @@ function scrollToSection(sectionId: string) {
 
 function toggleNavigation() {
     isNavigationOpen.value = !isNavigationOpen.value;
+}
+
+function makeBurst(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+
+    if (target.closest("a, button")) {
+        return;
+    }
+
+    const burstId = Date.now() + Math.random();
+    const glyphs = ["✦", "●", "✳", "◆"];
+
+    bursts.value.push({
+        id: burstId,
+        x: event.clientX,
+        y: event.clientY,
+        glyph: glyphs[Math.floor(Math.random() * glyphs.length)],
+    });
+
+    window.setTimeout(() => {
+        bursts.value = bursts.value.filter((burst) => burst.id !== burstId);
+    }, 850);
 }
 
 onMounted(async () => {
@@ -259,8 +283,9 @@ onBeforeUnmount(() => {
     <div
         ref="root"
         class="kinnor-shell relative min-h-screen overflow-x-clip"
+        @click="makeBurst"
     >
-        <AppEffects />
+        <AppEffects :bursts="bursts" />
 
         <IntroLoader />
 
