@@ -3,13 +3,12 @@ import type { ClickBurst } from "../types/kinnor";
 
 defineProps<{
     bursts: ClickBurst[];
+    scrollProgress: number;
 }>();
 </script>
 
 <template>
-    <div class="cursor-orb" aria-hidden="true"><span>POUR</span></div>
-
-    <TransitionGroup name="bursts">
+    <TransitionGroup name="burst">
         <span
             v-for="burst in bursts"
             :key="burst.id"
@@ -18,6 +17,14 @@ defineProps<{
             aria-hidden="true"
         >{{ burst.glyph }}</span>
     </TransitionGroup>
+
+    <div class="cursor-orb" aria-hidden="true"><span>POUR</span></div>
+
+    <div
+        class="page-progress"
+        :style="{ transform: `scaleX(${scrollProgress})` }"
+        aria-hidden="true"
+    ></div>
 </template>
 
 <style scoped>
@@ -65,6 +72,15 @@ defineProps<{
 .burst-leave-to {
     opacity: 0;
     transform: translate(-50%, -140%) scale(1.8) rotate(70deg);
+}
+
+.page-progress {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 9998;
+    height: 5px;
+    background: var(--orange);
+    transform-origin: left;
 }
 
 @media (max-width: 900px) {
