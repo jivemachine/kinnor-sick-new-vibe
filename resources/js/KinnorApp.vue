@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { nextTick, ref, onMounted, onBeforeUnmount } from "vue";
 import IntroLoader from "./components/IntroLoader.vue";
 import SiteNavigation from "./components/SiteNavigation.vue";
 import HeroSection from "./components/HeroSection.vue";
@@ -18,10 +18,11 @@ const isNavigationOpen = ref(false);
 const showIntro = ref(true);
 const clock = ref("");
 const bursts = ref<ClickBurst[]>([]);
+const scrollProgress = ref(0);
 
 let clockTimer: ReturnType<typeof setInterval> | undefined;
 let gsapContext: { revert: () => void } | undefined;
-// const cleanupFunctions: Array<() => void> = [];
+const cleanupFunctions: Array<() => void> = [];
 
 function updateClock() {
     clock.value = new Intl.DateTimeFormat("en-US", {
@@ -39,6 +40,14 @@ function scrollToSection(sectionId: string) {
         behavior: "smooth",
         block: "start",
     });
+}
+
+function updateScrollProgress() {
+    const availableScroll = document.documentElement.scrollHeight - window.innerHeight;
+
+    scrollProgress.value = availableScroll > 0
+        ? Math.min(window.scrollY / availableScroll, 1)
+        : 0;
 }
 
 function toggleNavigation() {
@@ -70,13 +79,33 @@ function makeBurst(event: MouseEvent) {
 onMounted(async () => {
     updateClock();
     clockTimer = setInterval(updateClock, 1000);
+
+    window.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+
+    cleanupFunctions.push(() => {
+        window.removeEventListener("scroll", updateScrollProgress);
+    });
+
+    await nextTick();
+
     if (!root.value) {
         return;
     }
 
-    const [{ gsap }] = await Promise.all([
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedMotion) {
+        showIntro.value = false;
+        return;
+    }
+
+    const [{ gsap }, { ScrollTrigger }] = await Promise.all([
         import("gsap"),
+        import("gsap/ScrollTrigger"),
     ]);
+
+    gsap.registerPlugin(ScrollTrigger);
 
     const cursor = root.value.querySelector<HTMLElement>(".cursor-orb");
     const moveCursorX = cursor
@@ -101,6 +130,10 @@ onMounted(async () => {
     }
 
     window.addEventListener("pointermove", updatePointerEffects, { passive: true });
+
+    cleanupFunctions.push(() => {
+        window.removeEventListener("pointermove", updatePointerEffects);
+    });
 
     gsapContext = gsap.context(() => {
         const loader = gsap.timeline({
@@ -129,136 +162,137 @@ onMounted(async () => {
             },
         });
 
-    gsap.from(".hero-letter", {
-        yPercent: 130,
-        rotate: () => gsap.utils.random(-14, 14),
-        duration: 1.2,
-        stagger: 0.055,
-        ease: "expo.out",
-        delay: 0.7,
-    });
-
-    gsap.from(".hero__eyebrow", {
-        opacity: 0,
-        y: 28,
-        duration: 0.9,
-        stagger: 0.12,
-        ease: "power3.out",
-        delay: 1,
-    });
-
-    const heroSticker = root.value?.querySelector<HTMLElement>("[data-hero-sticker]");
-
-    if (heroSticker) {
-        const stickerPeel = heroSticker.querySelector<HTMLElement>(".hero__script-peel");
-        const stickerImpact = heroSticker.querySelector<HTMLElement>(".hero__script-impact");
-        const startXPercent = Number(heroSticker.dataset.startXPercent);
-        const startYPercent = Number(heroSticker.dataset.startYPercent);
-        const startRotation = Number(heroSticker.dataset.startRotation);
-        const restingRotation = Number(heroSticker.dataset.restingRotation);
-        const rotationX = Number(heroSticker.dataset.rotationX);
-        const rotationY = Number(heroSticker.dataset.rotationY);
-        const transformOrigin = heroSticker.dataset.transformOrigin ?? "50% 50%";
-
-        gsap.set(heroSticker, {
-            autoAlpha: 0,
-            xPercent: startXPercent,
-            yPercent: startYPercent,
-            rotation: startRotation,
-            rotationX,
-            rotationY,
-            scale: 1.28,
-            transformOrigin,
-            transformPerspective: 900,
+        gsap.from(".hero-letter", {
+            yPercent: 130,
+            rotate: () => gsap.utils.random(-14, 14),
+            duration: 1.2,
+            stagger: 0.055,
+            ease: "expo.out",
+            delay: 0.7,
         });
 
-        const stickerTimeline = gsap.timeline({
-            delay: 1.75,
+        gsap.from(".hero__eyebrow, .hero__subcopy, .hero__actions", {
+            opacity: 0,
+            y: 28,
+            duration: 0.9,
+            stagger: 0.12,
+            ease: "power3.out",
+            delay: 1,
         });
 
-        stickerTimeline
-            .to(heroSticker, {
-                autoAlpha: 1,
-                duration: 0.01,
-            })
-            .to(heroSticker, {
-                xPercent: 0,
-                yPercent: 0,
-                rotation: restingRotation,
-                rotationX: 0,
-                rotationY: 0,
-                scale: 1.08,
-                duration: 0.58,
-                ease: "power4.in",
-            })
-            .to(heroSticker, {
-                scaleX: 1.09,
-                scaleY: 0.88,
-                duration: 0.09,
-                ease: "power2.out",
-            })
-            .to(heroSticker, {
-                scaleX: 0.98,
-                scaleY: 1.03,
-                duration: 0.16,
-                ease: "power2.out",
-            })
-            .to(heroSticker, {
-                scaleX: 1,
-                scaleY: 1,
-                duration: 0.58,
-                ease: "elastic.out(1, 0.38)",
+        const heroSticker = root.value?.querySelector<HTMLElement>("[data-hero-sticker]");
+
+        if (heroSticker) {
+            const stickerPeel = heroSticker.querySelector<HTMLElement>(".hero__script-peel");
+            const stickerImpact = heroSticker.querySelector<HTMLElement>(".hero__script-impact");
+            const startXPercent = Number(heroSticker.dataset.startXPercent);
+            const startYPercent = Number(heroSticker.dataset.startYPercent);
+            const startRotation = Number(heroSticker.dataset.startRotation);
+            const restingRotation = Number(heroSticker.dataset.restingRotation);
+            const rotationX = Number(heroSticker.dataset.rotationX);
+            const rotationY = Number(heroSticker.dataset.rotationY);
+            const transformOrigin = heroSticker.dataset.transformOrigin ?? "50% 50%";
+
+            gsap.set(heroSticker, {
+                autoAlpha: 0,
+                xPercent: startXPercent,
+                yPercent: startYPercent,
+                rotation: startRotation,
+                rotationX,
+                rotationY,
+                scale: 1.28,
+                transformOrigin,
+                transformPerspective: 900,
             });
 
-        if (stickerPeel) {
+            const stickerTimeline = gsap.timeline({
+                delay: 1.75,
+            });
+
             stickerTimeline
-                .fromTo(
-                    stickerPeel,
+                .to(heroSticker, {
+                    autoAlpha: 1,
+                    duration: 0.01,
+                })
+                .to(heroSticker, {
+                    xPercent: 0,
+                    yPercent: 0,
+                    rotation: restingRotation,
+                    rotationX: 0,
+                    rotationY: 0,
+                    scale: 1.08,
+                    duration: 0.58,
+                    ease: "power4.in",
+                })
+                .to(heroSticker, {
+                    scaleX: 1.09,
+                    scaleY: 0.88,
+                    duration: 0.09,
+                    ease: "power2.out",
+                })
+                .to(heroSticker, {
+                    scaleX: 0.98,
+                    scaleY: 1.03,
+                    duration: 0.16,
+                    ease: "power2.out",
+                })
+                .to(heroSticker, {
+                    scaleX: 1,
+                    scaleY: 1,
+                    duration: 0.58,
+                    ease: "elastic.out(1, 0.38)",
+                });
+
+            if (stickerPeel) {
+                stickerTimeline
+                    .fromTo(
+                        stickerPeel,
+                        {
+                            autoAlpha: 0,
+                            scale: 0.1,
+                            rotation: -18,
+                            rotationX: 72,
+                        },
+                        {
+                            autoAlpha: 1,
+                            scale: 1,
+                            rotation: 8,
+                            rotationX: 28,
+                            duration: 0.24,
+                            ease: "power2.out",
+                        },
+                        0.25,
+                    )
+                    .to(
+                        stickerPeel,
+                        {
+                            autoAlpha: 0,
+                            scale: 0,
+                            rotation: 0,
+                            rotationX: 0,
+                            duration: 0.26,
+                            ease: "power3.in",
+                        },
+                        0.54,
+                    );
+                }
+
+            if (stickerImpact) {
+                stickerTimeline.fromTo(
+                    stickerImpact,
                     {
-                        autoAlpha: 0,
-                        scale: 0.1,
-                        rotation: -18,
-                        rotationX: 72,
+                        autoAlpha: 0.8,
+                        scale: 0.72,
                     },
                     {
-                        autoAlpha: 1,
-                        scale: 1,
-                        rotation: 8,
-                        rotationX: 28,
-                        duration: 0.24,
+                        autoAlpha: 0,
+                        scale: 1.45,
+                        duration: 0.4,
                         ease: "power2.out",
                     },
-                    0.25,
-                )
-                .to(
-                    stickerPeel,
-                    {
-                        autoAlpha: 0,
-                        scale: 0,
-                        rotation: 0,
-                        rotationX: 0,
-                        duration: 0.26,
-                        ease: "power3.in",
-                    },
-                    0.54,
+                    0.59,
                 );
             }
-
-        if (stickerImpact) {
-            stickerTimeline.fromTo(
-                stickerImpact,
-                {
-                    autoAlpha: 0.8,
-                    scale: 0.72,
-                },
-                {
-                    autoAlpha: 0,
-                    scale: 1.45,
-                    duration: 0.4,
-                    ease: "power2.out",
-                },
-                0.59,
-            );
         }
 
         gsap.to(".orbit-copy", {
@@ -267,15 +301,64 @@ onMounted(async () => {
             repeat: -1,
             ease: "none",
         });
-    }
 
+        gsap.to(".hero__plane", {
+            yPercent: 26,
+            rotate: 4,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 1,
+            },
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((element) => {
+            gsap.from(element, {
+                y: 72,
+                opacity: 0,
+                rotate: element.dataset.reveal === "tilt" ? -3 : 0,
+                duration: 1.05,
+                ease: "expo.out",
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 88%",
+                    once: true,
+                },
+            });
+        });
+
+        gsap.utils.toArray<HTMLElement>("[data-scrub]").forEach((element, index) => {
+            gsap.fromTo
+            (
+                element,
+                { xPercent: index % 2 ? 18 : -18 },
+                {
+                    xPercent: index % 2 ? -10 : 10,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1.2,
+                    },
+                },
+            );
+        });
     }, root.value);
 });
 
 onBeforeUnmount(() => {
     if (clockTimer) {
-    clearInterval(clockTimer);
-  }
+        clearInterval(clockTimer);
+    }
+
+    cleanupFunctions.forEach((cleanup) => {
+        cleanup();
+    });
+
+    gsapContext?.revert();
 })
 </script>
 
@@ -285,9 +368,9 @@ onBeforeUnmount(() => {
         class="kinnor-shell relative min-h-screen overflow-x-clip"
         @click="makeBurst"
     >
-        <AppEffects :bursts="bursts" />
+        <AppEffects :bursts="bursts" :scroll-progress="scrollProgress" />
 
-        <IntroLoader />
+        <IntroLoader v-if="showIntro" />
 
         <SiteNavigation
             :clock="clock"
@@ -328,6 +411,5 @@ onBeforeUnmount(() => {
         </main>
 
         <SiteFooter @navigate="scrollToSection" />
-
     </div>
 </template>
