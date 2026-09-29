@@ -1,13 +1,13 @@
 import type { BusinessHour, MenuFrame, Mood, MoodTrack } from "../types/kinnor";
 
 export const businessHours: BusinessHour[] = [
-    ["MON", "7AM — 7PM"],
-    ["TUE", "CLOSED"],
-    ["WED", "7AM — 7PM"],
-    ["THU", "7AM — 7PM"],
-    ["FRI", "7AM — 10PM"],
-    ["SAT", "7AM — 10PM"],
-    ["SUN", "7AM — 7PM"],
+    ["MON", "7AM — 6PM"],
+    ["TUE", "7AM - 6PM"],
+    ["WED", "7AM — 6PM"],
+    ["THU", "7AM — 6PM"],
+    ["FRI", "7AM — 6PM"],
+    ["SAT", "7AM — 6PM"],
+    ["SUN", "7AM — 6PM"],
 ];
 
 // export const menuFrames: MenuFrame[] = [
