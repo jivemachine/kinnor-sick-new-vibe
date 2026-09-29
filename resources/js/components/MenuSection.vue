@@ -12,7 +12,10 @@ const activeFrame = ref<string | null>(null);
         <div class="menu-intro">
             <div class="section-label" data-reveal><span>03</span> THE NEXT POUR</div>
             <!-- <h2 data-reveal><p>SOMETIMES</p>THINGS <em>CHANGE.</em></h2> -->
-            <h2 data-reveal>FIND YOUR<br />NEXT <em>FAVORITE.</em></h2>
+            <h2 data-reveal>
+                <span class="menu-heading-line">FIND YOUR</span>
+                <span class="menu-heading-line">NEXT <em>FAVORITE.</em></span>
+            </h2>
             <p data-reveal>
                 Put those TPS reports in the shredder, take a break from the office,
                 and come sit down for awhile.
@@ -96,7 +99,7 @@ const activeFrame = ref<string | null>(null);
 
 .menu-intro {
     display: grid;
-    grid-template-columns: 1fr 1.2fr .7fr;
+    grid-template-columns: minmax(0, .7fr) minmax(0, 1.8fr) minmax(0, .7fr);
     align-items: end;
     gap: 2rem;
     margin-bottom: 5rem;
@@ -125,10 +128,15 @@ const activeFrame = ref<string | null>(null);
 .menu-intro h2 {
     margin: 0;
     font-family: "Bebas Neue", Impact, sans-serif;
-    font-size: clamp(5rem, 10vw, 10rem);
+    font-size: clamp(3rem, 9vw, 10rem);
     font-weight: 400;
     line-height: .8;
     letter-spacing: -.025em;
+}
+
+.menu-heading-line {
+    display: block;
+    white-space: nowrap;
 }
 
 .menu-intro h2 em {
@@ -351,7 +359,11 @@ const activeFrame = ref<string | null>(null);
     }
 
     .menu-intro {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .menu-intro h2 {
+        font-size: clamp(2.5rem, 16vw, 8rem);
     }
 
     .section-label {
