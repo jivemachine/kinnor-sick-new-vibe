@@ -36,19 +36,193 @@ export const menuFrames: MenuFrame[] = [
         label: "COFFEE",
         note: "Espresso, java, pour overs, and the like.",
         availability: "ALL DAY",
+        groups: [
+            {
+                label: "Espresso Drinks",
+                items: [
+                    {
+                        name: "Latte",
+                        price: "$5.50",
+                        description: "2 oz espresso / 8 oz milk"
+                    },
+                    {
+                        name: "Cappuccino",
+                        price: "$4.50",
+                        description: "2 oz espresso / 4 oz milk"
+                    },
+                    {
+                        name: "Cortado",
+                        price: "$4.00",
+                        description: "2 oz espresso / 2 oz milk"
+                    },
+                    {
+                        name: "Double Shot",
+                        price: "$3.00",
+                        description: "2 oz espresso"
+                    },
+                    {
+                        name: "Cowboy Like Me",
+                        price: "$6.50",
+                        description: "Cold brew, double shot of espresso, oat milk, and simple syrup.",
+                        detail: "Milk substitutions available."
+                    },
+                    {
+                        name: "Americano",
+                        price: "$3.00",
+                        description: "Double shot of espresso and water.",
+                        detail: "Hot or iced. “Cascade” +$0.50."
+                    }
+                ]
+            },
+            {
+                label: "Filter Coffee",
+                items: [
+                    {
+                        name: "Pour Over",
+                        price: "Market price",
+                        description: "Ask your server for options."
+                    },
+                    {
+                        name: "Drip",
+                        price: "$3.50 / $4.00",
+                        description: "12 oz / 16 oz"
+                    },
+                    {
+                        name: "Cold Brew",
+                        price: "$5.00 / $6.00",
+                        description: "12 oz / 16 oz"
+                    }
+                ]
+            }
+        ]
     },
     {
         number: "02",
         label: "NOT COFFEE",
         note: "Tea, sparkle, zero-proof, and everything adjacent.",
         availability: "ALL DAY",
+        groups: [
+            {
+                items: [
+                    {
+                        name: "Chai Latte",
+                        price: "$5.00",
+                        description: "Unsweet. Add a double shot +$1.25."
+                    },
+                    {
+                        name: "London Fog",
+                        price: "$5.00",
+                        description: "Unsweet. Add a double shot +$1.25."
+                    },
+                    {
+                        name: "Pineapple Hibiscus Tea",
+                        price: "$5.00"
+                    },
+                    {
+                        name: "Lemonade",
+                        price: "$4.00"
+                    },
+                    {
+                        name: "Hot Chocolate",
+                        price: "$4.00"
+                    },
+                    {
+                        name: "Iced Black Tea",
+                        price: "$3.00"
+                    }
+                ]
+            }
+        ]
     },
     {
         number: "03",
         label: "COCKTAILS",
         note: "Lights go down, proof goes up. The menu changes after dark.",
         availability: "AFTER DARK",
+        groups: [],
+        footer: "FULL MENU / SOON",
     },
+    {
+        number: "04",
+        label: "SPECIALTY SYRUPS",
+        note: "A little something extra, made in-house.",
+        availability: "ADD TO YOUR DRINK",
+        groups: [
+            {
+                items: [
+                    {
+                      name: "Sugar & Soul",
+                      price: "$1.00",
+                      description: "House-made syrup with honey, brown sugar, cinnamon, and vanilla."
+                    },
+                    {
+                      name: "Slow & Steady",
+                      price: "$0.75",
+                      description: "House-made syrup with maple, vanilla, cinnamon, cardamom, brown sugar, orange juice, and peel."
+                    },
+                    {
+                      name: "Vanilla",
+                      price: "$0.75",
+                      description: "House-made syrup with hand-scraped vanilla beans."
+                    },
+                    {
+                      name: "Vanilla Lavender",
+                      price: "$0.75",
+                      description: "House-made syrup with hand-scraped vanilla beans, lavender syrup, and dried lavender flowers."
+                    },
+                    {
+                      name: "Butterscotch",
+                      price: "$1.50",
+                      description: "House-made butterscotch with butter, heavy cream, brown sugar, and sea salt."
+                    },
+                    {
+                      name: "Mocha",
+                      price: "$1.50",
+                      description: "House-made chocolate ganache (dairy-free)."
+                    },
+                    {
+                      name: "White Chocolate Mocha",
+                      price: "$1.50",
+                      description: "Ganache with white chocolate chips and heavy cream."
+                    },
+                    {
+                      name: "Honey",
+                      price: "$0.75",
+                      description: "House-made honey syrup with Texas wildflower honey."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        number: "05",
+        label: "FALL SEASONAL",
+        note: "House-made flavors for sweater-weather sipping.",
+        availability: "FALL SPECIALS",
+        groups: [
+            {
+                items: [
+                    {
+                        name: "Pumpkin Pie",
+                        description: "House-made syrup with real baked pumpkins, cinnamon, nutmeg, ginger, cloves, and cardamom."
+                    },
+                    {
+                        name: "Fall Cake",
+                        description: "House-made syrup with zucchini, cinnamon, and nutmeg."
+                    },
+                    {
+                        name: "Granny Smith",
+                        description: "House-made syrup with Granny Smith apples, brown sugar, and cinnamon."
+                    },
+                    {
+                        name: "Smooth Operator",
+                        description: "House-made syrup with Granny Smith apples, brown sugar, and cinnamon.",
+                        detail: "Topped with a peanut butter whipped cream cheese."
+                    }
+                ]
+            }
+        ]
+    }
 ];
 
 const demoTracks: MoodTrack[] = [
