@@ -5,6 +5,8 @@ export type MenuFrame = {
     label: string;
     note: string;
     availability: string;
+    groups: MenuGroup[];
+    footer?: string;
 };
 
 export type Mood = {
@@ -33,4 +35,16 @@ export type MoodTrack = {
 
 export type MoodPlaylist = MoodTrack[] & {
     length: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+};
+
+export type MenuItem = {
+    name: string;
+    price?: string;
+    description?: string;
+    detail?: string;
+};
+
+export type MenuGroup = {
+    label?: string;
+    items: MenuItem[];
 };
