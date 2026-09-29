@@ -1,12 +1,43 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { moods } from "../content/kinnor";
+import type { Mood } from "../types/kinnor";
+import MoodPlayer from "./MoodPlayer.vue";
 
 const selectedMood = ref("slow");
+const player = ref<InstanceType<typeof MoodPlayer> | null>(null);
+let lastMoodButton: HTMLButtonElement | null = null;
+
+function selectMood(mood: Mood, event: MouseEvent) {
+    selectedMood.value = mood.id;
+    lastMoodButton = event.currentTarget as HTMLButtonElement;
+    player.value?.tuneIn(mood);
+}
+
+function restoreMoodFocus() {
+    lastMoodButton?.focus({ preventScroll: true });
+}
 
 const selected = computed(() => {
     return moods.find((mood) => mood.id === selectedMood.value) ?? moods[0];
 });
+
+function tiltCard(event: PointerEvent) {
+    const card = event.currentTarget as HTMLElement;
+    const bounds = card.getBoundingClientRect();
+    const horizontalPosition = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const verticalPosition = (event.clientY - bounds.top) / bounds.height - 0.5;
+
+    card.style.setProperty("--tilt-x", `${verticalPosition * -8}deg`);
+    card.style.setProperty("--tilt-y", `${horizontalPosition * 10}deg`);
+}
+
+function resetTilt(event: PointerEvent) {
+    const card = event.currentTarget as HTMLElement;
+
+    card.style.setProperty("--tilt-x", "0deg");
+    card.style.setProperty("--tilt-y", "0deg");
+}
 </script>
 
 <template>
@@ -21,6 +52,32 @@ const selected = computed(() => {
                 <span>↗ CLICK A CARD TO RETUNE</span>
             </div>
         </div>
+
+        <div class="mood-grid">
+            <button
+                v-for="(mood, index) in moods"
+                :key="mood.id"
+                class="mood-card"
+                type="button"
+                :aria-pressed="selectedMood === mood.id"
+                :class="{ 'mood-card--active': selectedMood === mood.id }"
+                :style="{ '--mood': mood.color }"
+                @click.stop="selectMood(mood, $event)"
+                @pointermove="tiltCard"
+                @pointerleave="resetTilt"
+            >
+                <span class="mood-card__index">0{{ index + 1 }}</span>
+                <time>{{ mood.time }}</time>
+                <div>
+                    <h3>{{ mood.title }}</h3>
+                    <p>{{ mood.note }}</p>
+                </div>
+                <span class="mood-card__select">
+                    {{ selectedMood === mood.id ? "TUNED ✓" : "TUNE IN ↗" }}
+                </span>
+            </button>
+        </div>
+        <MoodPlayer ref="player" @close="restoreMoodFocus" />
     </section>
 </template>
 
@@ -104,6 +161,84 @@ const selected = computed(() => {
     line-height: .95;
 }
 
+.mood-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.3rem;
+    perspective: 1200px;
+}
+
+.mood-card {
+    --tilt-x: 0deg;
+    --tilt-y: 0deg;
+    position: relative;
+    min-height: 440px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.2rem;
+    color: var(--cream) !important;
+    border: 2px solid var(--cream);
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(0);
+    transform-style: preserve-3d;
+    transition: transform .16s ease, color .35s, background .35s, box-shadow .35s;
+}
+
+.mood-card:nth-child(2) {
+    margin-top: 3rem;
+}
+
+.mood-card:nth-child(3) {
+    margin-top: 6rem;
+}
+
+.mood-card:hover,
+.mood-card--active {
+    color: var(--ink) !important;
+    background: var(--mood);
+    box-shadow: 10px 10px 0 var(--orange);
+}
+
+.mood-card:focus-visible {
+    outline: 3px solid var(--cream);
+    outline-offset: 6px;
+}
+
+.mood-card__index {
+    font-size: .62rem;
+}
+
+.mood-card time {
+    align-self: flex-end;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+}
+
+.mood-card h3 {
+    margin: 0 0 .7rem;
+    font-family: "Syne", sans-serif;
+    font-size: clamp(1.55rem, 3vw, 3rem);
+    font-weight: 800;
+    line-height: .9;
+}
+
+.mood-card p {
+    max-width: 26rem;
+    margin: 0;
+    font-size: .72rem;
+    line-height: 1.5;
+}
+
+.mood-card__select {
+    padding-top: 1rem;
+    border-top: 1px solid currentColor;
+    font-size: .62rem;
+}
+
 @media (max-width: 900px) {
     .mood-section {
         padding: 7rem 1.25rem;
@@ -120,6 +255,19 @@ const selected = computed(() => {
     .frequency-card {
         max-width: 330px;
         margin-left: auto;
+    }
+
+    .mood-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mood-card {
+        min-height: 340px;
+    }
+
+    .mood-card:nth-child(2),
+    .mood-card:nth-child(3) {
+        margin-top: 0;
     }
 }
 
