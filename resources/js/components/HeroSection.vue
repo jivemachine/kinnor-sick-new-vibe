@@ -176,7 +176,8 @@ const emit = defineEmits<{
                     <span>COME ON<br />THROUGH</span>
                     <b>↘</b>
                 </button>
-                <p><strong>OPEN TODAY?</strong><br />Check the hours below. Tuesday we're closed to hit the river!</p>
+                <!-- <p><strong>OPEN TODAY?</strong><br />Check the hours below. Tuesday we're closed to hit the river!</p> -->
+                <p><strong>OPEN EVERY DAY</strong><br />7AM — 6PM. See you in the room.</p>
             </div>
         </div>
 
