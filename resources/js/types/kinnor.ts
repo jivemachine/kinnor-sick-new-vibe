@@ -14,6 +14,7 @@ export type Mood = {
     note: string;
     color: string;
     frequency: string;
+    playlist: MoodPlaylist;
 };
 
 export type ClickBurst = {
@@ -21,4 +22,15 @@ export type ClickBurst = {
     x: number;
     y: number;
     glyph: string;
+};
+
+export type MoodTrack = {
+    title: string;
+    artist: string;
+    src: string;
+    demo?: boolean;
+};
+
+export type MoodPlaylist = MoodTrack[] & {
+    length: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 };
