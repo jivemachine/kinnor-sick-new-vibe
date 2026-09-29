@@ -220,7 +220,7 @@ import { businessHours } from "../content/kinnor";
 
 @media (max-width: 560px) {
     .visit-sun {
-        right: -5rem;
+        right: -2rem;
     }
 
     .visit-title h2 {
