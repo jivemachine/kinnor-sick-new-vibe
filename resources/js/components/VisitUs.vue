@@ -108,10 +108,18 @@ import { businessHours } from "../content/kinnor";
 
 .visit-grid {
     display: grid;
-    grid-template-columns: .8fr 1.2fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: stretch;
     gap: 1.5rem;
     margin-top: 5rem;
+}
+
+.address-card,
+.hours-card {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    border: 2px solid var(--cream);
 }
 
 .address-card {
@@ -124,7 +132,6 @@ import { businessHours } from "../content/kinnor";
     background: var(--pink);
     box-shadow: 10px 10px 0 var(--ink);
     text-decoration: none;
-    transform: rotate(-1.2deg);
     transition: transform .3s, background .3s;
 }
 
@@ -141,8 +148,9 @@ import { businessHours } from "../content/kinnor";
 }
 
 .address-card strong {
+    overflow-wrap: anywhere;
     font-family: "Syne", sans-serif;
-    font-size: clamp(2.2rem, 4vw, 4.6rem);
+    font-size: clamp(1.6rem, 3vw, 3.4rem);
     font-weight: 800;
     line-height: .9;
 }
@@ -166,7 +174,7 @@ import { businessHours } from "../content/kinnor";
 
 .hours-row {
     display: grid;
-    grid-template-columns: 48px 1fr auto;
+    grid-template-columns: 48px minmax(0, 1fr) max-content;
     align-items: center;
     gap: 1rem;
     padding: 1.06rem 0;
@@ -185,6 +193,10 @@ import { businessHours } from "../content/kinnor";
     color: var(--pink);
 }
 
+.hours-row strong {
+    white-space: nowrap;
+}
+
 
 @media (max-width: 900px) {
     .visit-section {
@@ -198,7 +210,7 @@ import { businessHours } from "../content/kinnor";
     }
 
     .visit-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .address-card {
@@ -216,15 +228,18 @@ import { businessHours } from "../content/kinnor";
     }
 
     .address-card strong {
-        font-size: 2.15rem;
+        font-size: clamp(1.35rem, 5.8vw, 2rem);
+        line-height: 1.05;
     }
 
+    .address-card,
     .hours-card {
         padding: 1.1rem;
     }
 
     .hours-row {
-        gap: .6rem;
+        grid-template-columns: 2.5rem minmax(0, 1fr) max-content;
+        gap: .5rem;
     }
 }
 
