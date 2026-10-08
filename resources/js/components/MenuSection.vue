@@ -380,8 +380,14 @@ const activeFrame = ref<string | null>(null);
         margin-bottom: 3rem;
     }
 
-    .menu-frame-reveal,
+    /* OLD WHEN THE COCKTAIL MENU WAS STILL HERE */
+    /* .menu-frame-reveal,
     .menu-frame-reveal:nth-child(n + 4) {
+        grid-column: auto;
+    } */
+
+    .menu-frame-reveal,
+    .menu-frame-reveal:nth-child(n + 3) {
         grid-column: auto;
     }
 
@@ -390,9 +396,10 @@ const activeFrame = ref<string | null>(null);
         --frame-active-rotation: 1.5deg;
     }
 
-    .menu-frame-reveal:nth-child(3) .menu-frame {
+    /* OLD FROM WHEN COCKTAIL MENU WAS STILL HERE */
+    /* .menu-frame-reveal:nth-child(3) .menu-frame {
         --frame-active-rotation: -1.5deg;
-    }
+    } */
 
     .menu-frame-reveal:nth-child(n + 4) .menu-frame {
         --frame-active-rotation: 1.5deg;
