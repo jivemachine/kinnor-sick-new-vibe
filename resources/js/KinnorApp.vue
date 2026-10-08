@@ -473,25 +473,42 @@ onBeforeUnmount(() => {
 
             <StorySection @navigate="scrollToSection" />
 
-            <MotionTicker
+            <!-- <MotionTicker
                 message="&nbsp;✦ LOREM ✦ FUCKiN ✦ IPSUM"
+            /> -->
+            <MotionTicker
+                message="&nbsp;✦ FOR THE SAKE OF DOING WELL A THING THAT IS WELL WORTH DOING"
             />
 
             <MoodSection />
 
-            <MotionTicker
+            <!-- <MotionTicker
                 message="&nbsp;I haven't decided if I think this is cool or not...  ✺ "
+                tone="pink"
+            /> -->
+            <MotionTicker
+                message="&nbsp;✺ MAKE SOMETHING WORTH SHARING"
                 tone="pink"
             />
 
             <MenuSection />
 
-            <MotionTicker
+            <!-- <MotionTicker
                 message="&nbsp;TWO SPINNY THINGS, ONE PAGE✦ ✦ ✦"
+            /> -->
+
+            <!-- <MotionTicker
+                message="&nbsp;DON'T TALK TO ME ✦ ✦ ✦"
+                tone="pink"
+                reverse
+            /> -->
+
+            <MotionTicker
+                message="&nbsp;✺ SEE YOU IN THE ROOM"
             />
 
             <MotionTicker
-                message="&nbsp;DON'T TALK TO ME ✦ ✦ ✦"
+                message="&nbsp;✦ POUR SLOWLY ✦ TALK TO STRANGERS"
                 tone="pink"
                 reverse
             />
