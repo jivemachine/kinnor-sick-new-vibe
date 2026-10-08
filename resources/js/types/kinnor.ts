@@ -1,6 +1,7 @@
 export type BusinessHour = readonly [day: string, hours: string];
 
 export type MenuFrame = {
+    row?: number;
     number: string;
     label: string;
     note: string;
@@ -47,4 +48,9 @@ export type MenuItem = {
 export type MenuGroup = {
     label?: string;
     items: MenuItem[];
+};
+
+export type PublishedMenu = {
+    active: boolean;
+    frames: MenuFrame[];
 };
