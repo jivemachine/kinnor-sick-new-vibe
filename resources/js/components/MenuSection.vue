@@ -155,7 +155,7 @@ const activeFrame = ref<string | null>(null);
 
 .menu-frames {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     align-items: start;
     gap: 4.5rem 1.75rem;
 }
@@ -164,15 +164,6 @@ const activeFrame = ref<string | null>(null);
     grid-column: span 2;
     position: relative;
     min-width: 0;
-}
-
-/* OLD WHEN THE COCKTAIL MENU WAS STILL HERE */
-/* .menu-frame-reveal:nth-child(n + 4) {
-    grid-column: span 3;
-} */
-
-.menu-frame-reveal:nth-child(2) {
-    grid-column: span 3;
 }
 
 .menu-frame-reveal:nth-child(n + 4) {
@@ -208,21 +199,20 @@ const activeFrame = ref<string | null>(null);
     background: var(--pink);
 }
 
-/* TO REMOVE THE COCKTAIL MENU STYLING */
-/* .menu-frame-reveal:nth-child(3) .menu-frame {
+.menu-frame-reveal:nth-child(3) .menu-frame {
     --frame-rotation: -.7deg;
     --frame-active-rotation: -2deg;
     color: var(--cream);
     background: var(--blue);
-} */
+}
 
-.menu-frame-reveal:nth-child(3) .menu-frame {
+.menu-frame-reveal:nth-child(4) .menu-frame {
     --frame-rotation: .8deg;
     --frame-active-rotation: 2deg;
     background: var(--orange);
 }
 
-.menu-frame-reveal:nth-child(4) .menu-frame {
+.menu-frame-reveal:nth-child(5) .menu-frame {
     --frame-rotation: -1deg;
     --frame-active-rotation: -2deg;
     background: var(--pink);
@@ -380,14 +370,8 @@ const activeFrame = ref<string | null>(null);
         margin-bottom: 3rem;
     }
 
-    /* OLD WHEN THE COCKTAIL MENU WAS STILL HERE */
-    /* .menu-frame-reveal,
-    .menu-frame-reveal:nth-child(n + 4) {
-        grid-column: auto;
-    } */
-
     .menu-frame-reveal,
-    .menu-frame-reveal:nth-child(n + 3) {
+    .menu-frame-reveal:nth-child(n + 4) {
         grid-column: auto;
     }
 
@@ -396,10 +380,9 @@ const activeFrame = ref<string | null>(null);
         --frame-active-rotation: 1.5deg;
     }
 
-    /* OLD FROM WHEN COCKTAIL MENU WAS STILL HERE */
-    /* .menu-frame-reveal:nth-child(3) .menu-frame {
+    .menu-frame-reveal:nth-child(3) .menu-frame {
         --frame-active-rotation: -1.5deg;
-    } */
+    }
 
     .menu-frame-reveal:nth-child(n + 4) .menu-frame {
         --frame-active-rotation: 1.5deg;

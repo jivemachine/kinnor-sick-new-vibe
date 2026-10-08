@@ -134,16 +134,16 @@ export const menuFrames: MenuFrame[] = [
             }
         ]
     },
-    // {
-    //     number: "03",
-    //     label: "COCKTAILS",
-    //     note: "Lights go down, proof goes up. The menu changes after dark.",
-    //     availability: "AFTER DARK",
-    //     groups: [],
-    //     footer: "FULL MENU / SOON",
-    // },
     {
         number: "03",
+        label: "COCKTAILS",
+        note: "Lights go down, proof goes up. The menu changes after dark.",
+        availability: "AFTER DARK",
+        groups: [],
+        footer: "FULL MENU / SOON",
+    },
+    {
+        number: "04",
         label: "SPECIALTY SYRUPS",
         note: "A little something extra, made in-house.",
         availability: "ADD TO YOUR DRINK",
@@ -195,7 +195,7 @@ export const menuFrames: MenuFrame[] = [
         ]
     },
     {
-        number: "04",
+        number: "05",
         label: "FALL SEASONAL",
         note: "House-made flavors for sweater-weather sipping.",
         availability: "FALL SPECIALS",
