@@ -1,12 +1,37 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { menuFrames } from "../content/kinnor";
+import { computed, inject, ref } from "vue";
+import { menuFrames as previewFrames } from "../content/kinnor";
+import type { MenuFrame, PublishedMenu } from "../types/kinnor";
+
+const publishedMenu = inject<PublishedMenu | null>("publishedMenu", null);
+
+const menuFrames = publishedMenu === null
+    ? previewFrames.map((frame, index) => ({ ...frame, row: index < 3 ? 1 : 2 }))
+    : publishedMenu.active ? publishedMenu.frames.slice(0, 9) : [];
+
+const menuRows = computed(() => {
+    const rows = new Map<number, MenuFrame[]>();
+    menuFrames.forEach((frame) => {
+        const row = frame.row ?? 1;
+        rows.set(row, [...(rows.get(row) ?? []), frame]);
+    });
+
+    return [...rows.entries()].sort(([left], [right]) => left - right)
+    .flatMap(([row, frames]) => {
+        const chunks: { key: string; frames: MenuFrame[] }[] = [];
+
+        for (let index = 0; index < frames.length; index += 3) {
+            chunks.push({ key: `${row}-${index}`, frames: frames.slice(index, index + 3) });
+        }
+        return chunks;
+    });
+});
 
 const activeFrame = ref<string | null>(null);
 </script>
 
 <template>
-    <section id="menu" class="menu-section">
+    <section v-if="menuFrames.length" id="menu" class="menu-section">
         <div class="menu-orbit" aria-hidden="true">MENU MENU MENU MENU MENU MENU</div>
 
         <div class="menu-intro">
@@ -24,47 +49,49 @@ const activeFrame = ref<string | null>(null);
 
         <!-- <div class="menu-orbit-lol" aria-hidden="true">MENU MENU MENU MENU MENU MENU</div> -->
 
-        <div class="menu-frames">
-            <div
-                v-for="frame in menuFrames"
-                :key="frame.number"
-                class="menu-frame-reveal"
-                :class="{ 'menu-frame-reveal--active': activeFrame === frame.number }"
-                data-reveal
-                @pointerenter="activeFrame = frame.number"
-            >
-                <article class="menu-frame" :class="{ 'menu-frame--active': activeFrame === frame.number }">
-                    <button
-                        type="button"
-                        class="menu-frame__select"
-                        :aria-label="`Tilt ${frame.label.toLowerCase()} menu frame`"
-                        :aria-pressed="activeFrame === frame.number"
-                        @click="activeFrame = frame.number"
-                        @focus="activeFrame = frame.number"
-                    ></button>
-                    <div class="menu-frame__top">
-                        <span>{{ frame.number }}</span>
-                        <i>{{ frame.availability }}</i>
-                    </div>
-                    <h3>{{ frame.label }}</h3>
-                    <p>{{ frame.note }}</p>
-                    <div v-if="frame.groups.length" class="menu-frame__groups">
-                        <div v-for="(group, groupIndex) in frame.groups" :key="groupIndex" class="menu-group">
-                            <h4 v-if="group.label">{{ group.label }}</h4>
-                            <ul class="menu-items">
-                                <li v-for="item in group.items" :key="item.name" class="menu-item">
-                                    <div class="menu-item__heading">
-                                        <span class="menu-item__name">{{ item.name }}</span>
-                                        <span v-if="item.price" class="menu-item__price">{{ item.price }}</span>
-                                    </div>
-                                    <p v-if="item.description" class="menu-item__description">{{ item.description }}</p>
-                                    <p v-if="item.detail" class="menu-item__detail">{{ item.detail }}</p>
-                                </li>
-                            </ul>
+        <div class="menu-rows">
+            <div v-for="row in menuRows" :key="row.key" class="menu-frames" :class="`menu-frames--${row.frames.length}`">
+                <div
+                    v-for="frame in row.frames"
+                    :key="frame.number"
+                    class="menu-frame-reveal"
+                    :class="{ 'menu-frame-reveal--active': activeFrame === frame.number }"
+                    data-reveal
+                    @pointerenter="activeFrame = frame.number"
+                >
+                    <article class="menu-frame" :class="{ 'menu-frame--active': activeFrame === frame.number }">
+                        <button
+                            type="button"
+                            class="menu-frame__select"
+                            :aria-label="`Tilt ${frame.label.toLowerCase()} menu frame`"
+                            :aria-pressed="activeFrame === frame.number"
+                            @click="activeFrame = frame.number"
+                            @focus="activeFrame = frame.number"
+                        ></button>
+                        <div class="menu-frame__top">
+                            <span>{{ frame.number }}</span>
+                            <i>{{ frame.availability }}</i>
                         </div>
-                    </div>
-                    <span v-if="frame.footer" class="menu-frame__soon">{{ frame.footer }}</span>
-                </article>
+                        <h3>{{ frame.label }}</h3>
+                        <p>{{ frame.note }}</p>
+                        <div v-if="frame.groups.length" class="menu-frame__groups">
+                            <div v-for="(group, groupIndex) in frame.groups" :key="groupIndex" class="menu-group">
+                                <h4 v-if="group.label">{{ group.label }}</h4>
+                                <ul class="menu-items">
+                                    <li v-for="(item, itemIndex) in group.items" :key="itemIndex" class="menu-item">
+                                        <div class="menu-item__heading">
+                                            <span class="menu-item__name">{{ item.name }}</span>
+                                            <span v-if="item.price" class="menu-item__price">{{ item.price }}</span>
+                                        </div>
+                                        <p v-if="item.description" class="menu-item__description">{{ item.description }}</p>
+                                        <p v-if="item.detail" class="menu-item__detail">{{ item.detail }}</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <span v-if="frame.footer" class="menu-frame__soon">{{ frame.footer }}</span>
+                    </article>
+                </div>
             </div>
         </div>
     </section>
@@ -153,21 +180,36 @@ const activeFrame = ref<string | null>(null);
     line-height: 1.65;
 }
 
+.menu-rows {
+    display: grid;
+    gap: 5rem;
+    max-width: 1500px;
+    margin-inline: auto;
+}
+
 .menu-frames {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: start;
     gap: 4.5rem 1.75rem;
+    width: 100%;
+    margin-inline: auto;
+}
+
+.menu-frames--1 {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 680px;
+}
+
+.menu-frames--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 1100px;
 }
 
 .menu-frame-reveal {
-    grid-column: span 2;
     position: relative;
     min-width: 0;
-}
-
-.menu-frame-reveal:nth-child(n + 4) {
-    grid-column: span 3;
+    overflow-wrap: anywhere;
 }
 
 .menu-frame-reveal--active {
@@ -206,13 +248,13 @@ const activeFrame = ref<string | null>(null);
     background: var(--blue);
 }
 
-.menu-frame-reveal:nth-child(4) .menu-frame {
+.menu-frames:nth-child(even) .menu-frame-reveal:first-child .menu-frame {
     --frame-rotation: .8deg;
     --frame-active-rotation: 2deg;
     background: var(--orange);
 }
 
-.menu-frame-reveal:nth-child(5) .menu-frame {
+.menu-frames:nth-child(even) .menu-frame-reveal:nth-child(2) .menu-frame {
     --frame-rotation: -1deg;
     --frame-active-rotation: -2deg;
     background: var(--pink);
@@ -347,6 +389,10 @@ const activeFrame = ref<string | null>(null);
         opacity: .25;
     }
 
+    .menu-rows {
+        gap: 2.5rem;
+    }
+
     .menu-frames {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -368,11 +414,6 @@ const activeFrame = ref<string | null>(null);
 
     .section-label {
         margin-bottom: 3rem;
-    }
-
-    .menu-frame-reveal,
-    .menu-frame-reveal:nth-child(n + 4) {
-        grid-column: auto;
     }
 
     .menu-frame-reveal:nth-child(2) .menu-frame {
