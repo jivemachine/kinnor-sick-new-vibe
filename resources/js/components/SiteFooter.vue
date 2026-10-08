@@ -19,7 +19,7 @@ const currentYear = new Date().getFullYear();
 
         <div class="footer-bottom">
             <span>SMALL SHOP. BIG FEELING.</span>
-            <span>COZY. COFFEE. COMFORTABLE. KINNOR.</span>
+            <!-- <span>COZY. COFFEE. COMFORTABLE. KINNOR.</span> -->
             <span>© {{ currentYear }} KINNOR COFFEE</span>
         </div>
     </footer>
