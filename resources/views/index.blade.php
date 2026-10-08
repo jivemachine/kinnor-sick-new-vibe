@@ -15,6 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body>
+        <script id="published-menu" type="application/json">{!! \Illuminate\Support\Js::encode($menu) !!}</script>
         <div id="kinnor-app">
             <noscript>This page needs JavaScript to run the Kinnor experience.</noscript>
         </div>
