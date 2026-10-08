@@ -487,7 +487,7 @@ onBeforeUnmount(() => {
                 tone="pink"
             /> -->
             <MotionTicker
-                message="&nbsp;✺ MAKE SOMETHING WORTH SHARING"
+                message="&nbsp;✺ MAKE SOMETHING WORTH SHARING ✺ TODAY, TOMORROW OR THE NEXT DAY"
                 tone="pink"
             />
 
@@ -504,7 +504,7 @@ onBeforeUnmount(() => {
             /> -->
 
             <MotionTicker
-                message="&nbsp;✺ SEE YOU IN THE ROOM"
+                message="&nbsp;✺ SEE YOU IN THE ROOM ✺ HAVE FUN"
             />
 
             <MotionTicker
