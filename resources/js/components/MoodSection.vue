@@ -67,9 +67,29 @@ function resetTilt(event: PointerEvent) {
                 @pointerleave="resetTilt"
             >
                 <span class="mood-card__index">0{{ index + 1 }}</span>
-                <time>{{ mood.time }}</time>
+                <time :datetime="mood.time" :aria-label="mood.time">
+                    <span
+                        v-for="(character, characterIndex) in mood.time"
+                        :key="characterIndex"
+                        class="mood-letter"
+                        data-fall-letter
+                        aria-hidden="true"
+                    >{{ character }}</span>
+                </time>
                 <div>
-                    <h3>{{ mood.title }}</h3>
+                    <h3 :aria-label="mood.title">
+                        <span
+                            v-for="(word, wordIndex) in mood.title.split(' ')"
+                            :key="wordIndex"
+                            class="mood-word"
+                            aria-hidden="true"
+                        ><span
+                            v-for="(character, characterIndex) in word"
+                            :key="characterIndex"
+                            class="mood-letter"
+                            data-fall-letter
+                        >{{ character }}</span></span>
+                    </h3>
                     <p>{{ mood.note }}</p>
                 </div>
                 <span class="mood-card__select">
@@ -162,6 +182,8 @@ function resetTilt(event: PointerEvent) {
 }
 
 .mood-grid {
+    position: relative;
+    z-index: 6;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.3rem;
@@ -172,6 +194,7 @@ function resetTilt(event: PointerEvent) {
     --tilt-x: 0deg;
     --tilt-y: 0deg;
     position: relative;
+    overflow: visible;
     min-height: 440px;
     display: flex;
     flex-direction: column;
@@ -185,6 +208,18 @@ function resetTilt(event: PointerEvent) {
     transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(0);
     transform-style: preserve-3d;
     transition: transform .16s ease, color .35s, background .35s, box-shadow .35s;
+}
+
+.mood-card--shedding {
+    z-index: 1;
+    --tilt-x: 0deg !important;
+    --tilt-y: 0deg !important;
+}
+
+.mood-card--shedding .mood-letter {
+    color: var(--mood);
+    -webkit-text-stroke: .75px var(--ink);
+    text-shadow: 1px 2px 0 var(--cream);
 }
 
 .mood-card:nth-child(2) {
@@ -224,6 +259,22 @@ function resetTilt(event: PointerEvent) {
     font-size: clamp(1.55rem, 3vw, 3rem);
     font-weight: 800;
     line-height: .9;
+}
+
+.mood-word {
+    display: inline-block;
+    margin-inline-end: .24em;
+    white-space: nowrap;
+}
+
+.mood-word:last-child {
+    margin-inline-end: 0;
+}
+
+.mood-letter {
+    display: inline-block;
+    pointer-events: none;
+    transform-origin: 50% 85%;
 }
 
 .mood-card p {
