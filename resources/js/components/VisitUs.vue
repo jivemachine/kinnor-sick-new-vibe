@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { businessHours } from "../content/kinnor";
+import { inject } from "vue";
+import { businessHours as previewHours } from "../content/kinnor";
+import type { PublishedStoreHours } from "../types/kinnor";
+
+const publishedHours = inject<PublishedStoreHours | null>("publishedStoreHours", null);
+const businessHours = publishedHours === null ? previewHours : publishedHours.hours;
 </script>
 
 <template>
@@ -28,8 +33,11 @@ import { businessHours } from "../content/kinnor";
             <div class="hours-card" data-reveal>
                 <div class="hours-card__head">
                     <span>HOURS / WEEKLY</span>
-                    <b>CST</b>
+                    <b title="Central Time (New Braunfels)">CT</b>
                 </div>
+                <p v-if="!businessHours.length" class="hours-unavailable">
+                    Hours are temporarily unavailable. Please check with us before visiting.
+                </p>
                 <div
                     v-for="day in businessHours"
                     :key="day[0]"
@@ -194,7 +202,14 @@ import { businessHours } from "../content/kinnor";
 }
 
 .hours-row strong {
-    white-space: nowrap;
+    max-width: 22ch;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+.hours-unavailable {
+    font-size: .85rem;
+    line-height: 1.6;
 }
 
 
