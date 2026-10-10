@@ -54,3 +54,8 @@ export type PublishedMenu = {
     active: boolean;
     frames: MenuFrame[];
 };
+
+export type PublishedStoreHours = {
+    timezone: "America/Chicago";
+    hours: BusinessHour[];
+};
