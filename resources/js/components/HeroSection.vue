@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { inject } from "vue";
+import { businessHours as previewHours } from "../content/kinnor";
+import type { PublishedStoreHours } from "../types/kinnor";
+import { summarizeStoreHours } from "../utils/storeHours";
+
+const publishedHours = inject<PublishedStoreHours | null>("publishedStoreHours", null);
+const hoursSummary = summarizeStoreHours(publishedHours === null ? previewHours : publishedHours.hours);
+
 type StickerPeelCorner = "top-left" | "top-right" | "bottom-left" | "bottom-right";
 
 type StickerOrientation = {
@@ -177,7 +185,8 @@ const emit = defineEmits<{
                     <b>↘</b>
                 </button>
                 <!-- <p><strong>OPEN TODAY?</strong><br />Check the hours below. Tuesday we're closed to hit the river!</p> -->
-                <p><strong>OPEN EVERY DAY</strong><br />7AM — 6PM. See you in the room.</p>
+                <!-- <p><strong>OPEN EVERY DAY</strong><br />7AM — 6PM. See you in the room.</p> -->
+                <p><strong>{{ hoursSummary.heading }}</strong><br />{{ hoursSummary.detail }}</p>
             </div>
         </div>
 
