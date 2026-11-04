@@ -94,7 +94,7 @@ const businessHours = publishedHours === null ? previewHours : publishedHours.ho
     margin-bottom: 1rem;
     padding: .4rem .7rem;
     color: var(--ink);
-    background: var(--pink);
+    background: var(--robin-egg);
     transform: rotate(-2deg);
 }
 
@@ -137,7 +137,7 @@ const businessHours = publishedHours === null ? previewHours : publishedHours.ho
     justify-content: space-between;
     padding: 1.6rem;
     color: var(--ink) !important;
-    background: var(--pink);
+    background: var(--cream);
     box-shadow: 10px 10px 0 var(--ink);
     text-decoration: none;
     transition: transform .3s, background .3s;
