@@ -1,10 +1,10 @@
 <template>
     <div class="intro-loader">
-        <div class="loader__slice loader__slice--lime" />
-        <div class="loader__slice loader__slice--pink" />
-        <div class="loader__slice loader__slice--orange" />
+        <div class="loader__slice loader__slice--cream" />
+        <div class="loader__slice loader__slice--robin-egg" />
+        <div class="loader__slice loader__slice--tulle-soft-mint" />
         <img class="loader__logo" :src="'/kinnor-logo.avif'" alt="" />
-        <p>COFFEE / COCKTAILS / COMMUNITY</p>
+        <p>CRAFT / COFFEE / COMMUNITY</p>
     </div>
 </template>
 
@@ -56,6 +56,18 @@
     background: var(--orange);
 }
 
+.loader__slice--cream {
+    background: var(--cream);
+}
 
+.loader__slice--robin-egg {
+    inset: 25% 0 0;
+    background: var(--robin-egg);
+}
+
+.loader__slice--tulle-soft-mint {
+    inset: 60% 0 0;
+    background: var(--tulle-soft-mint);
+}
 
 </style>
