@@ -514,6 +514,7 @@ const emit = defineEmits<{
     font-size: .58rem;
     letter-spacing: .12em;
     transform: translateX(-50%);
+    white-space: nowrap;
 }
 
 .scroll-cue span {
@@ -541,7 +542,6 @@ const emit = defineEmits<{
 
 @media (max-width: 900px) {
     .hero {
-        min-height: 880px;
         padding-top: 9rem;
     }
 
@@ -609,7 +609,6 @@ const emit = defineEmits<{
 
 @media (max-width: 560px) {
     .hero {
-        min-height: 780px;
         padding-inline: 1rem;
     }
 
@@ -628,9 +627,13 @@ const emit = defineEmits<{
     }
 
     .hero-sticker {
-        bottom: 13vh;
+        bottom: -1vh;
         width: 115px;
         font-size: .75rem;
+    }
+
+    .bean--two {
+        display: none;
     }
 
     .orbit-seal {
@@ -657,6 +660,27 @@ const emit = defineEmits<{
         font-size: .40rem;
         font-weight: 700;
         letter-spacing: .16em;
+    }
+}
+
+@media (max-width: 560px) and (max-height: 600px) {
+    .orbit-seal {
+        top: 5vh;
+    }
+
+    .bean--one {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) and (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        min-height: 700px;
+    }
+
+    .scroll-cue {
+        top: min(calc(100svh - 2rem), 360px);
+        bottom: auto;
     }
 }
 </style>
