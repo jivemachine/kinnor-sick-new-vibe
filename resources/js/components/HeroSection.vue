@@ -150,12 +150,8 @@ const emit = defineEmits<{
 
         <div class="hero__plane">
             <div class="orbit-seal" aria-hidden="true">
-                <!-- <div class="orbit-copy">COFFEE • COCKTAILS • COMMUNITY • KINNOR •&nbsp;</div> -->
-                <!-- <div class="orbit-copy"><span>• COFFEE • COCKTAILS •</span><br><span>• COMMUNITY • KINNOR •</span></div> -->
-                <!-- <div class="orbit-copy"><span>COFFEE&nbsp; • COCKTAILS</span><br><span>COMMUNITY • KINNOR</span></div> -->
-                <div class="orbit-copy"><span>COFFEE • COMMUNITY</span><br><span>KINNOR • COCKTAILS</span></div>
-                <!-- <div class="orbit-copy">• COFFEE • COCKTAILS •</div> -->
-                <!-- <div class="orbit-copy-bottom">• COMMUNITY • KINNOR •</div> -->
+                <!-- <div class="orbit-copy"><span>COFFEE • COMMUNITY</span><br><span>KINNOR • COCKTAILS</span></div> -->
+                <div class="orbit-copy"><span>KINNOR • COFFEE</span><br><span class="upside-down-text">COFFEE • KINNOR</span></div>
                 <span>✦</span>
             </div>
             <div class="bean bean--one" aria-hidden="true" />
@@ -171,8 +167,10 @@ const emit = defineEmits<{
             </p> -->
             <p class="hero__subcopy">
                 A tiny family-owned coffee shop.<br />
-                A craft cocktail lounge.<br />
-                A good excuse to stay awhile.
+                A great excuse for an iced latte.<br />
+                Let us DJ your coffee break.
+                <!-- A craft cocktail lounge.<br /> -->
+                <!-- A good excuse to stay awhile. -->
             </p>
             <!-- <p class="hero__subcopy">
                 A tiny family-owned coffee shop.<br />
@@ -521,6 +519,11 @@ const emit = defineEmits<{
 .scroll-cue span {
     display: inline-block;
     animation: bounce 1.5s infinite;
+}
+
+.upside-down-text {
+    display: inline-block;
+    transform: rotate(180deg);
 }
 
 @keyframes bean-float {
