@@ -42,10 +42,12 @@ function resetTilt(event: PointerEvent) {
 
 <template>
     <section id="moods" class="mood-section">
-        <div class="section-label" data-reveal><span>02</span> PICK YOUR FREQUENCY</div>
+        <!-- <div class="section-label" data-reveal><span>02</span> PICK YOUR FREQUENCY</div> -->
+        <div class="section-label" data-reveal><span>02</span> PICK A FREQUENCY</div>
 
         <div class="mood-header">
             <h2 data-reveal>WHAT KIND<br />OF <em>DAY</em><br />IS IT?</h2>
+            <!-- <h2 data-reveal>YOUR FRIENDLY<br />NEIGHBORHOOD<br /> <em>VIBE</em> DEALER</h2> -->
             <div class="frequency-card" :style="{ backgroundColor: selected.color }" data-reveal>
                 <small>CURRENTLY TUNED TO</small>
                 <strong>{{ selected.frequency }}</strong>
