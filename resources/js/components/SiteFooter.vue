@@ -11,7 +11,7 @@ const currentYear = new Date().getFullYear();
     <footer class="site-footer">
         <div class="footer-top">
             <img :src="'/kinnor-logo.avif'" alt="Kinnor Coffee" />
-            <p>COFFEE / COCKTAILS / COMMUNITY<br />NEW BRAUNFELS, TEXAS</p>
+            <p>CRAFT / COFFEE / COMMUNITY<br />NEW BRAUNFELS, TEXAS</p>
             <button @click="emit('navigate', 'top')">BACK TO THE TOP ↑</button>
         </div>
 
@@ -19,7 +19,6 @@ const currentYear = new Date().getFullYear();
 
         <div class="footer-bottom">
             <span>SMALL SHOP. BIG FEELING.</span>
-            <!-- <span>COZY. COFFEE. COMFORTABLE. KINNOR.</span> -->
             <span>© {{ currentYear }} KINNOR COFFEE</span>
         </div>
     </footer>
