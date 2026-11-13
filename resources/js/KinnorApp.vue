@@ -476,8 +476,28 @@ onBeforeUnmount(() => {
             <!-- <MotionTicker
                 message="&nbsp;✦ LOREM ✦ FUCKiN ✦ IPSUM"
             /> -->
-            <MotionTicker
+            <!-- <MotionTicker
                 message="&nbsp;✦ FOR THE SAKE OF DOING WELL A THING THAT IS WELL WORTH DOING"
+            /> -->
+            <!-- <MotionTicker
+                message="&nbsp;✦ A THING THAT IS WELL WORTH DOING"
+                tone="pink"
+                reverse
+            /> -->
+            <!-- <MotionTicker
+                message="&nbsp;✦ A THING THAT IS WELL WORTH DOING"
+                tone="pink"
+                reverse
+            /> -->
+
+            <MotionTicker
+                message="&nbsp;✺ FOR THE SAKE OF DOING WELL"
+                reverse
+            />
+
+            <MotionTicker
+                message="&nbsp;✦ A THING THAT IS WELL WORTH DOING"
+                tone="pink"
             />
 
             <MoodSection />
@@ -486,9 +506,13 @@ onBeforeUnmount(() => {
                 message="&nbsp;I haven't decided if I think this is cool or not...  ✺ "
                 tone="pink"
             /> -->
-            <MotionTicker
+            <!-- <MotionTicker
                 message="&nbsp;✺ MAKE SOMETHING WORTH SHARING ✺ TODAY, TOMORROW OR THE NEXT DAY"
                 tone="pink"
+            /> -->
+
+            <MotionTicker
+                message="&nbsp;✦ LOREM ✦ FUCKiN ✦ IPSUM"
             />
 
             <MenuSection />
@@ -503,12 +527,23 @@ onBeforeUnmount(() => {
                 reverse
             /> -->
 
-            <MotionTicker
+            <!-- <MotionTicker
                 message="&nbsp;✺ SEE YOU IN THE ROOM ✺ HAVE FUN"
             />
 
             <MotionTicker
                 message="&nbsp;✦ POUR SLOWLY ✦ TALK TO STRANGERS"
+                tone="pink"
+                reverse
+            /> -->
+
+            <MotionTicker
+                message="&nbsp;✦ STRANGER DANGER ISIN'T REAL"
+                reverse
+            />
+
+            <MotionTicker
+                message="&nbsp;✺ MEET NEW PEOPLE"
                 tone="pink"
                 reverse
             />
