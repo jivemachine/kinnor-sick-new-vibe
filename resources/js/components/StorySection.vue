@@ -17,7 +17,7 @@ const emit = defineEmits<{
             <div class="story-copy" data-reveal>
                 <p class="lead">Community is not a feature. It is the whole point.</p>
                 <p>
-                    Kinnor is a small family-owned specialty coffee shop and craft cocktail lounge in the heart
+                    Kinnor is a small family-owned specialty coffee shop in the heart
                     of New Braunfels. The work matters, but sharing it matters more.
                 </p>
                 <p>
