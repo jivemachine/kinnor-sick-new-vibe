@@ -106,6 +106,11 @@ onMounted(async () => {
     ]);
 
     gsap.registerPlugin(ScrollTrigger);
+    const moodMatchMedia = gsap.matchMedia();
+
+    cleanupFunctions.push(() => {
+        moodMatchMedia.revert();
+    });
 
     const cursor = root.value.querySelector<HTMLElement>(".cursor-orb");
     const moveCursorX = cursor
@@ -314,74 +319,87 @@ onMounted(async () => {
             ease: "none",
         });
 
-        gsap.utils.toArray<HTMLElement>(".mood-card").forEach((card, cardIndex) => {
-            const letters = gsap.utils.toArray<HTMLElement>(card.querySelectorAll("[data-fall-letter]"));
-            const letterFall = gsap.timeline({
-                scrollTrigger: {
-                    trigger: card,
-                    start: "top 12%",
-                    end: "bottom top",
-                    scrub: 0.45,
-                    invalidateOnRefresh: true,
-                    toggleClass: { targets: card, className: "mood-card--shedding" },
-                },
-            });
+        moodMatchMedia.add({
+            singleColumn: "(max-width: 900px)",
+            multiColumn: "(min-width: 901px)",
+        }, (context) => {
+            const menuSection = context.conditions?.singleColumn
+                ? root.value?.querySelector<HTMLElement>("#menu")
+                : null;
 
-            letters.forEach((letter, index) => {
-            // Repeatable variations keep the bounce stable when reversing or resizing.
-            const seed = (index * 7 + cardIndex * 11) % 17;
-            const direction = seed % 2 ? -1 : 1;
-            const delay = (seed % 9) * 0.012;
-            const spread = direction * (18 + seed * 4);
-            const impactDistance = () => getLayoutPosition(card).top + card.offsetHeight * 0.48
-                + window.innerHeight * 0.78 - getLayoutPosition(letter).top - letter.offsetHeight;
-            const bounceHeight = () => window.innerHeight * (0.16 + (seed % 5) * 0.025);
+            if (context.conditions?.singleColumn && !menuSection) {
+                return;
+            }
 
-            letterFall
-                .fromTo(letter, {
-                    x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1, autoAlpha: 1,
-                }, {
-                    x: spread,
-                    y: impactDistance,
-                    rotation: direction * (18 + seed * 3),
-                    duration: 0.42,
-                    ease: "power2.in",
-                }, delay)
-                .to(letter, {
-                    scaleX: 1.18,
-                    scaleY: 0.62,
-                    duration: 0.035,
-                    ease: "power1.out",
-                }, delay + 0.42)
-                .to(letter, {
-                    x: spread * 1.65,
-                    y: () => impactDistance() - bounceHeight(),
-                    rotation: direction * (65 + seed * 4),
-                    scaleX: 1,
-                    scaleY: 1,
-                    duration: 0.14,
-                    ease: "power2.out",
-                }, delay + 0.455)
-                .to(letter, {
-                    x: spread * 2.1,
-                    y: () => impactDistance() + window.innerHeight * 0.08,
-                    rotation: direction * (95 + seed * 5),
-                    duration: 0.11,
-                    ease: "power2.in",
-                }, delay + 0.595)
-                .to(letter, {
-                    y: () => impactDistance() - bounceHeight() * 0.12,
-                    duration: 0.115 - delay,
-                    ease: "power1.out",
-                }, delay + 0.705)
-                .to(letter, {
-                    x: () => spread * 2.5 + direction * window.innerWidth * 0.16,
-                    y: () => impactDistance() + window.innerHeight * 0.85,
-                    rotation: direction * (160 + seed * 5),
-                    autoAlpha: 0,
-                    duration: 0.18,
-                    ease: "power2.in",
-                }, 0.82);
+            gsap.utils.toArray<HTMLElement>(".mood-card").forEach((card, cardIndex) => {
+                const letters = gsap.utils.toArray<HTMLElement>(card.querySelectorAll("[data-fall-letter]"));
+                const letterFall = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: menuSection ?? card,
+                        start: menuSection ? "top bottom" : "top 12%",
+                        end: menuSection ? "top 65%" : "bottom top",
+                        scrub: 0.45,
+                        invalidateOnRefresh: true,
+                        toggleClass: { targets: card, className: "mood-card--shedding" },
+                    },
+                });
+
+                letters.forEach((letter, index) => {
+                    // Repeatable variations keep the bounce stable when reversing or resizing.
+                    const seed = (index * 7 + cardIndex * 11) % 17;
+                    const direction = seed % 2 ? -1 : 1;
+                    const delay = (seed % 9) * 0.012;
+                    const spread = direction * (18 + seed * 4);
+                    const impactDistance = () => getLayoutPosition(card).top + card.offsetHeight * 0.48
+                        + window.innerHeight * 0.78 - getLayoutPosition(letter).top - letter.offsetHeight;
+                    const bounceHeight = () => window.innerHeight * (0.16 + (seed % 5) * 0.025);
+
+                    letterFall
+                        .fromTo(letter, {
+                            x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1, autoAlpha: 1,
+                        }, {
+                            x: spread,
+                            y: impactDistance,
+                            rotation: direction * (18 + seed * 3),
+                            duration: 0.42,
+                            ease: "power2.in",
+                        }, delay)
+                        .to(letter, {
+                            scaleX: 1.18,
+                            scaleY: 0.62,
+                            duration: 0.035,
+                            ease: "power1.out",
+                        }, delay + 0.42)
+                        .to(letter, {
+                            x: spread * 1.65,
+                            y: () => impactDistance() - bounceHeight(),
+                            rotation: direction * (65 + seed * 4),
+                            scaleX: 1,
+                            scaleY: 1,
+                            duration: 0.14,
+                            ease: "power2.out",
+                        }, delay + 0.455)
+                        .to(letter, {
+                            x: spread * 2.1,
+                            y: () => impactDistance() + window.innerHeight * 0.08,
+                            rotation: direction * (95 + seed * 5),
+                            duration: 0.11,
+                            ease: "power2.in",
+                        }, delay + 0.595)
+                        .to(letter, {
+                            y: () => impactDistance() - bounceHeight() * 0.12,
+                            duration: 0.115 - delay,
+                            ease: "power1.out",
+                        }, delay + 0.705)
+                        .to(letter, {
+                            x: () => spread * 2.5 + direction * window.innerWidth * 0.16,
+                            y: () => impactDistance() + window.innerHeight * 0.85,
+                            rotation: direction * (160 + seed * 5),
+                            autoAlpha: 0,
+                            duration: 0.18,
+                            ease: "power2.in",
+                        }, 0.82);
+                });
             });
         });
 
