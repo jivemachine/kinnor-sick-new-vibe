@@ -40,6 +40,8 @@ const activeFrame = ref<string | null>(null);
             <h2 data-reveal>
                 <span class="menu-heading-line">FIND YOUR</span>
                 <span class="menu-heading-line">NEXT <em>FAVORITE.</em></span>
+                <span class="menu-heading-line--mobile">YOUR NEXT</span>
+                <span class="menu-heading-line--mobile"><em>FAVORITE.</em></span>
             </h2>
             <p data-reveal>
                 Put those TPS reports in the shredder, take a break from the office,
@@ -164,6 +166,10 @@ const activeFrame = ref<string | null>(null);
 .menu-heading-line {
     display: block;
     white-space: nowrap;
+}
+
+.menu-heading-line--mobile {
+    display: none;
 }
 
 .menu-intro h2 em {
@@ -451,6 +457,16 @@ const activeFrame = ref<string | null>(null);
 
     .menu-item__heading {
         flex-wrap: wrap;
+    }
+
+    .menu-heading-line {
+        display: none;
+        white-space: nowrap;
+    }
+
+    .menu-heading-line--mobile {
+        display: block;
+        white-space: nowrap;
     }
 }
 </style>
