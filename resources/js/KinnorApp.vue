@@ -529,8 +529,12 @@ onBeforeUnmount(() => {
                 tone="pink"
             /> -->
 
-            <MotionTicker
+            <!-- <MotionTicker
                 message="&nbsp;✦ LOREM ✦ FUCKiN ✦ IPSUM"
+            /> -->
+
+            <MotionTicker
+                message="&nbsp;✦ FIND REST"
             />
 
             <MenuSection />
