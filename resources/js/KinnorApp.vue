@@ -533,8 +533,11 @@ onBeforeUnmount(() => {
                 message="&nbsp;✦ LOREM ✦ FUCKiN ✦ IPSUM"
             /> -->
 
-            <MotionTicker
+            <!-- <MotionTicker
                 message="&nbsp;✦ FIND REST"
+            /> -->
+            <MotionTicker
+                message="&nbsp;✦ THE POUR NEXT DOOR"
             />
 
             <MenuSection />
